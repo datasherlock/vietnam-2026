@@ -1,0 +1,2881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vietnam Family Companion — Dec 19–30, 2026 (Jerome, Sandra &amp; Katie)</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .card-shadow {
+      box-shadow: 0 4px 24px -2px rgba(15, 23, 42, 0.07), 0 2px 8px -1px rgba(15, 23, 42, 0.04);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+
+  <!-- Toast Notification -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-200 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 text-sm font-medium">
+    <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+    <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <!-- Top Sticky Header + Mobile Sticky Day Bar -->
+  <header class="bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-900 text-white border-b border-slate-800 sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3.5">
+      <div class="flex items-center justify-between gap-2">
+        <div class="min-w-0">
+          <div class="hidden sm:flex flex-wrap items-center gap-2 mb-1">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-400/20 text-amber-300 border border-amber-400/30">
+              100% Ticketed Plan
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-400/15 text-emerald-300 border border-emerald-400/25">
+              Sat, Dec 19 – Wed, Dec 30, 2026 (11 Nights)
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-sky-400/15 text-sky-300 border border-sky-400/25">
+              Maps • Cheapest Tickets • Advance Booking Rules
+            </span>
+          </div>
+          <h1 class="text-sm sm:text-xl font-extrabold tracking-tight text-white truncate">
+            🇻🇳 Vietnam Family Companion (Dec 19–30)
+          </h1>
+        </div>
+
+        <!-- Checklist Progress & Quick VND Button -->
+        <div class="flex items-center gap-2 shrink-0">
+          <div class="hidden md:block bg-slate-800/90 border border-slate-700 rounded-xl px-3 py-1.5 text-xs">
+            <div class="flex items-center justify-between gap-3 text-slate-300">
+              <span>Checklist</span>
+              <span id="header-progress-text" class="font-bold text-amber-300">0 / 38</span>
+            </div>
+            <div class="w-28 bg-slate-700 h-1.5 rounded-full mt-1 overflow-hidden">
+              <div id="header-progress-bar" class="bg-amber-400 h-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+          <button id="btn-quick-calc" type="button" onclick="switchMainView('tools')" class="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition shadow-sm">
+            🎟️ Tickets &amp; ₫
+          </button>
+        </div>
+      </div>
+
+      <!-- Primary Navigation Bar -->
+      <nav class="flex items-center gap-1.5 mt-2 sm:mt-3 overflow-x-auto no-scrollbar pb-0.5" aria-label="Primary Navigation">
+        <button id="nav-itinerary" type="button" onclick="switchMainView('itinerary')" class="nav-tab px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-slate-900 shadow-sm">
+          🗓️ 12-Day Planner
+        </button>
+        <button id="nav-christmas" type="button" onclick="switchMainView('christmas')" class="nav-tab px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+          ⛪ Christmas &amp; Tours
+        </button>
+        <button id="nav-dining" type="button" onclick="switchMainView('dining')" class="nav-tab px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+          ☕ Eat &amp; Sip (Uncle Huan)
+        </button>
+        <button id="nav-tools" type="button" onclick="switchMainView('tools')" class="nav-tab px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+          🎟️ Cheapest Tickets &amp; ₫ Calc
+        </button>
+        <button id="nav-scams" type="button" onclick="switchMainView('scams')" class="nav-tab px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+          🛡️ Scams &amp; Skip List
+        </button>
+        <button id="nav-vault" type="button" onclick="switchMainView('vault')" class="nav-tab px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+          🎫 Bookings Vault
+        </button>
+      </nav>
+    </div>
+
+    <!-- STICKY MOBILE DAY STRIP (Pinned inside sticky header on mobile <1024px when on 12-Day Planner) -->
+    <div id="mobile-sticky-day-bar" class="lg:hidden bg-slate-900/95 border-t border-slate-800 px-3 py-2">
+      <div class="flex items-center gap-1.5">
+        <button type="button" onclick="stepDay(-1)" aria-label="Previous Day" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-extrabold shrink-0 border border-slate-700">
+          ◀
+        </button>
+        <div id="day-selector-strip" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-1">
+          <!-- Populated dynamically by renderDayNav() -->
+        </div>
+        <button type="button" onclick="stepDay(1)" aria-label="Next Day" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-extrabold shrink-0 border border-slate-700">
+          ▶
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-5">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: 12-DAY PLANNER (MASTER-DETAIL UI)  -->
+    <!-- ========================================== -->
+    <section id="view-itinerary" class="space-y-4">
+
+      <!-- Top Control Strip: Region Filters, Search & View Mode Toggle -->
+      <div class="bg-white rounded-2xl p-3.5 border border-slate-200 card-shadow flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+        <!-- Region Filter Pills -->
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400 mr-1">Base:</span>
+          <button id="reg-all" type="button" onclick="setRegionFilter('all')" class="reg-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition">
+            All 12 Days
+          </button>
+          <button id="reg-hoian" type="button" onclick="setRegionFilter('hoian')" class="reg-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+            🏮 100% Hoi An (Dec 19–23)
+          </button>
+          <button id="reg-hanoi" type="button" onclick="setRegionFilter('hanoi')" class="reg-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+            🏛️ Hanoi Culture (Dec 23–27 &amp; 29–30)
+          </button>
+          <button id="reg-halong" type="button" onclick="setRegionFilter('halong')" class="reg-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+            ⛵ Ha Long Bay Cruise (Dec 28–29)
+          </button>
+        </div>
+
+        <!-- Search & Focus vs. All-Days Toggle -->
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="relative flex-1 sm:w-64">
+            <input id="itinerary-search" type="text" oninput="handleItinerarySearch(this.value)" placeholder="Search Uncle Huan, church, jeep, lantern..." class="w-full pl-3 pr-8 py-1.5 text-xs sm:text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <button id="btn-clear-search" type="button" onclick="clearItinerarySearch()" class="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs hidden">✕</button>
+          </div>
+          <div class="inline-flex rounded-lg border border-slate-200 p-0.5 bg-slate-100">
+            <button id="mode-single-btn" type="button" onclick="setDisplayMode('single')" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-slate-900 shadow-sm transition">
+              🎯 Single-Day Focus
+            </button>
+            <button id="mode-all-btn" type="button" onclick="setDisplayMode('all')" class="px-2.5 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition">
+              📜 Scroll All Days
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reservation Legend Banner -->
+      <div class="bg-white rounded-xl px-3.5 py-2.5 border border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-bold text-slate-700">Booking Legend:</span>
+          <span class="px-2 py-0.5 rounded font-bold bg-rose-100 text-rose-900 border border-rose-200">🔴 Reserve in Advance (Essential)</span>
+          <span class="px-2 py-0.5 rounded font-bold bg-amber-100 text-amber-900 border border-amber-200">🟡 Book 1–2 Days Ahead</span>
+          <span class="px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-900 border border-emerald-200">🟢 Walk-In Friendly (No Booking Needed)</span>
+        </div>
+        <span class="text-slate-500">Every stop includes <strong>📍 Google Maps</strong> &amp; <strong>🎟️ Cheapest Ticket</strong> links</span>
+      </div>
+
+      <!-- Master-Detail Layout: Left Sticky 12-Day Rail + Right Day Workspace -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+
+        <!-- Left Sticky 12-Day Rail (Desktop) -->
+        <aside class="hidden lg:block lg:col-span-4 xl:col-span-3 sticky top-32 bg-white rounded-2xl border border-slate-200 card-shadow overflow-hidden">
+          <div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between">
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-amber-300">12-Day Navigator</div>
+              <div class="text-[11px] text-slate-300">Use ← / → arrow keys to step</div>
+            </div>
+            <button type="button" onclick="setDisplayMode(appState.displayMode === 'single' ? 'all' : 'single')" id="sidebar-mode-badge" class="px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 hover:bg-indigo-500/50 transition">
+              Scroll All
+            </button>
+          </div>
+          <div id="desktop-day-rail" class="divide-y divide-slate-100 max-h-[calc(100vh-220px)] overflow-y-auto">
+            <!-- Populated dynamically by renderDayNav() -->
+          </div>
+        </aside>
+
+        <!-- Right Day Detail Workspace -->
+        <div class="lg:col-span-8 xl:col-span-9 space-y-4">
+
+          <!-- Single-Day Stepper & Section Filter Bar -->
+          <div id="day-stepper-bar" class="bg-white rounded-2xl p-3 border border-slate-200 card-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <div class="flex items-center justify-between sm:justify-start gap-2">
+              <button id="btn-prev-day" type="button" onclick="stepDay(-1)" class="px-3 py-1.5 rounded-lg border border-slate-300 bg-slate-50 hover:bg-slate-100 text-xs font-bold text-slate-700 transition">
+                ← Prev Day
+              </button>
+              <span id="stepper-day-indicator" class="text-xs sm:text-sm font-extrabold text-slate-900 px-2">
+                Day 1 of 12
+              </span>
+              <button id="btn-next-day" type="button" onclick="stepDay(1)" class="px-3 py-1.5 rounded-lg border border-slate-300 bg-slate-50 hover:bg-slate-100 text-xs font-bold text-slate-700 transition">
+                Next Day →
+              </button>
+            </div>
+
+            <!-- Inner Card Section Pills -->
+            <div class="flex flex-wrap items-center gap-1">
+              <button id="sec-all" type="button" onclick="setCardSectionFilter('all')" class="sec-pill px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-600 text-white transition">
+                All Sections
+              </button>
+              <button id="sec-do" type="button" onclick="setCardSectionFilter('do')" class="sec-pill px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                📍 Schedule
+              </button>
+              <button id="sec-eat" type="button" onclick="setCardSectionFilter('eat')" class="sec-pill px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                ☕ Eat &amp; Sip
+              </button>
+              <button id="sec-hacks" type="button" onclick="setCardSectionFilter('hacks')" class="sec-pill px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                💡 Hacks
+              </button>
+              <button id="sec-scams" type="button" onclick="setCardSectionFilter('scams')" class="sec-pill px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                🛡️ Watch-Outs
+              </button>
+            </div>
+          </div>
+
+          <!-- Day Cards Container -->
+          <div id="itinerary-cards-container" class="space-y-6">
+            <!-- Populated by renderItineraryCards() -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: EVANGELICAL CHRISTMAS & TOURS HUB  -->
+    <!-- ========================================== -->
+    <section id="view-christmas" class="hidden space-y-6">
+      <!-- Evangelical Christmas Services in Hanoi -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-900">
+              Dec 24 Night (Christmas Eve) or Dec 25 Morning (Christmas Day)
+            </span>
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mt-1">
+              ⛪ Verified Evangelical Christmas Worship Options in Hanoi
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-600">
+              Two Protestant Evangelical congregations in Hanoi—complete with Google Maps links, service times, and arrival tips.
+            </p>
+          </div>
+          <button type="button" onclick="jumpToDayFromHub(6)" class="self-start px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shrink-0">
+            View on Dec 24 / Dec 25 Schedule →
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- Church 1: HIF -->
+          <div class="rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50/60 via-white to-white p-5 space-y-3">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-indigo-600 text-white">
+                    ★ Top Pick for English Worship &amp; Katie (4.8★)
+                  </span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-900">
+                    🟢 Free Entry • Arrive 20m Early
+                  </span>
+                </div>
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mt-1.5">
+                  Hanoi International Fellowship (HIF)
+                </h3>
+                <p class="text-xs text-slate-500 font-medium">
+                  Interdenominational English-Speaking Evangelical Church (50+ Nations)
+                </p>
+              </div>
+            </div>
+
+            <div class="text-xs sm:text-sm text-slate-700 space-y-1.5 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
+              <div><strong>📍 Sanctuary Address:</strong> 17th Floor, Detech Tower, 8 Tôn Thất Thuyết, Mỹ Đình, Cầu Giấy, Hanoi (~20 mins by Grab from Sheraton Hanoi)</div>
+              <div><strong>🕯️ Best Service Slot:</strong> <strong>Thu, Dec 24 (Christmas Eve Candlelight Service)</strong> — typically two evening candlelight gatherings (~17:30 &amp; ~19:30)</div>
+              <div><strong>👧 For Katie (Age 8):</strong> Dedicated <strong>KidzQuest</strong> children's Christmas program, carols, candlelight worship, and fellowship</div>
+              <div><strong>📞 Contact:</strong> <code class="bg-white px-1.5 py-0.5 rounded border">+84 243 200 6666</code></div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <a href="https://www.google.com/maps/search/?api=1&query=Hanoi+International+Fellowship+Detech+Building+8+Ton+That+Thuyet+Hanoi" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition">
+                📍 Open in Google Maps ↗
+              </a>
+              <a href="https://www.hif.vn/%F0%9F%8E%84-advent-christmas-services-at-hif-youre-invited/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">
+                Official HIF Christmas Page ↗
+              </a>
+              <button type="button" onclick="copyText('Hanoi International Fellowship, Detech Building, 8 Ton That Thuyet, Cau Giay, Hanoi')" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-semibold transition">
+                📋 Copy Address
+              </button>
+            </div>
+          </div>
+
+          <!-- Church 2: Hanoi Evangelical Church -->
+          <div class="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50/60 via-white to-white p-5 space-y-3">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-emerald-700 text-white">
+                    ★ Historic 1916 Old Quarter Sanctuary (4.7★)
+                  </span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-900">
+                    🟡 Free Entry • Arrive 30m Early
+                  </span>
+                </div>
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mt-1.5">
+                  Hanoi Evangelical Church (Nhà thờ Tin Lành Hà Nội)
+                </h3>
+                <p class="text-xs text-slate-500 font-medium">
+                  The Oldest Protestant Evangelical Congregation in Northern Vietnam (Est. 1916)
+                </p>
+              </div>
+            </div>
+
+            <div class="text-xs sm:text-sm text-slate-700 space-y-1.5 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
+              <div><strong>📍 Sanctuary Address:</strong> 2 Ngõ Trạm, Hàng Bông, Hoàn Kiếm District, Hanoi (Right in the Old Quarter — 15 mins from Sheraton Hanoi)</div>
+              <div><strong>🌅 Best Service Slots:</strong> <strong>Fri, Dec 25 Morning (Christmas Day Worship at ~08:30 AM / 10:00 AM)</strong> OR <strong>Thu, Dec 24 Night (Christmas Eve Program at ~19:30)</strong></div>
+              <div><strong>🎶 Experience:</strong> Historic yellow-walled sanctuary decked out with wreaths and nativity scenes, joyous choir hymns, and traditional Vietnamese Evangelical worship</div>
+              <div><strong>📞 Contact:</strong> <code class="bg-white px-1.5 py-0.5 rounded border">+84 984 875 475</code></div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <a href="https://www.google.com/maps/search/?api=1&query=Nha+tho+Tin+Lanh+Ha+Noi+2+Ngo+Tram+Hoan+Kiem+Hanoi" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition">
+                📍 Open in Google Maps ↗
+              </a>
+              <button type="button" onclick="copyText('Nha tho Tin Lanh Ha Noi, 2 Ngo Tram, Hang Bong, Hoan Kiem, Hanoi')" class="px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold transition">
+                📋 Copy Address for Grab
+              </button>
+              <button type="button" onclick="jumpToDayFromHub(7)" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-semibold transition">
+                View Dec 25 Morning Plan →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Highly Rated Guided Tours Added to Your Hanoi Days -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow space-y-4">
+        <div>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-900">
+            🔴 Advance Booking Recommended (3–5 Days Ahead for Christmas Week)
+          </span>
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mt-1">
+            🚙 Top-Rated Hanoi Guided Tours (With Direct Cheapest Booking Links)
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600">
+            Booking directly with the local operators below saves 15–20% over third-party resellers and guarantees a private vehicle/guide for Jerome, Sandra &amp; Katie.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- Tour 1: Vintage Army Jeep Tour -->
+          <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50/60 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-amber-500 text-slate-950">
+                Day 9 • Sun, Dec 27 (08:30 AM – 12:30 PM)
+              </span>
+              <span class="px-2 py-0.5 rounded text-xs font-bold bg-rose-100 text-rose-900">
+                🔴 Reserve 3–5 Days Ahead
+              </span>
+            </div>
+            <h3 class="text-base sm:text-lg font-extrabold text-slate-900">
+              1. Hanoi Backstreet Tours — Half-Day Vintage Open-Air Army Jeep Tour (5.0★)
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Your guide and professional driver pick you up directly at <strong>Sheraton Hanoi Hotel</strong> in an authentic open-top vintage UAZ Army Jeep (all 3 of you sit securely together).
+            </p>
+            <ul class="text-xs text-slate-700 space-y-1 list-disc pl-4">
+              <li><strong>Route:</strong> French Quarter backstreets, Gustave Eiffel's 1902 Long Biên Bridge, Red River Banana Island farms, and Ngọc Hà B-52 Lake.</li>
+              <li><strong>Cheapest Direct Rate:</strong> ~1,250,000 ₫ (~$49 USD / adult; kids discounted) on the official Hanoi Backstreet Tours site (includes 100% money-back satisfaction guarantee).</li>
+            </ul>
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <a href="https://hanoibackstreettours.com/product-category/hanoi-jeep-tours/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold transition">
+                🎟️ Book Direct (Cheapest Rate) ↗
+              </a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Hanoi+Backstreet+Tours+3B+Hang+Tre+Hoan+Kiem+Hanoi" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition">
+                📍 Google Maps ↗
+              </a>
+              <button type="button" onclick="jumpToDayFromHub(9)" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-white text-slate-700 text-xs font-semibold transition">
+                See on Day 9 →
+              </button>
+            </div>
+          </div>
+
+          <!-- Tour 2: Private Old Quarter Walking Street Food Tour -->
+          <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50/60 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-indigo-600 text-white">
+                Day 6 • Thu, Dec 24 (01:30 PM – 04:30 PM)
+              </span>
+              <span class="px-2 py-0.5 rounded text-xs font-bold bg-rose-100 text-rose-900">
+                🔴 Reserve 3–5 Days Ahead
+              </span>
+            </div>
+            <h3 class="text-base sm:text-lg font-extrabold text-slate-900">
+              2. Private Old Quarter Walking Street Food &amp; Egg Coffee Tour (4.8★)
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Eliminates all guesswork about which stalls are hygienic, handles all ordering in Vietnamese (including <em>"Không cay"</em> for Katie), and ends at 1946 Cafe Giảng.
+            </p>
+            <ul class="text-xs text-slate-700 space-y-1 list-disc pl-4">
+              <li><strong>6–7 Curated Tastings:</strong> Smoky charcoal <em>Bún Chả</em>, steamed <em>Bánh Cuốn</em> rice rolls, crispy pillow dumplings (<em>Bánh Gối</em>), <em>Bánh Mì</em>, and original Egg Coffee / Egg Cocoa at Cafe Giảng.</li>
+              <li><strong>Cheapest Direct Rate:</strong> ~$25–$35 USD / person booked directly via Hanoi Street Food Tour (78A Trần Nhật Duật).</li>
+            </ul>
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <a href="https://www.hanoistreetfoodtour.com/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold transition">
+                🎟️ Book Direct (Cheapest Rate) ↗
+              </a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Hanoi+Street+Food+Tour+78A+Tran+Nhat+Duat+Hoan+Kiem+Hanoi" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition">
+                📍 Google Maps ↗
+              </a>
+              <button type="button" onclick="jumpToDayFromHub(6)" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-white text-slate-700 text-xs font-semibold transition">
+                See on Day 6 →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: WHERE TO EAT (FAMILY DINING GUIDE) -->
+    <!-- ========================================== -->
+    <section id="view-dining" class="hidden space-y-5">
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">☕ Family Dining &amp; Cafe Directory (With Maps &amp; Reservation Rules)</h2>
+            <p class="text-xs sm:text-sm text-slate-600">
+              Every spot below shows whether you need to <strong>reserve in advance</strong> or can <strong>walk right in</strong>, plus direct <strong>📍 Google Maps</strong> and online table booking links.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="dining-city-filter" onchange="setDiningCity(this.value)" aria-label="Filter restaurants by city" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs sm:text-sm font-medium bg-slate-50">
+              <option value="all">All Cities (12 Spots)</option>
+              <option value="Hoi An">Hoi An (6 Spots)</option>
+              <option value="Hanoi">Hanoi (6 Spots)</option>
+            </select>
+            <select id="dining-tag-filter" onchange="setDiningTag(this.value)" aria-label="Filter restaurants by category" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs sm:text-sm font-medium bg-slate-50">
+              <option value="all">All Categories</option>
+              <option value="Cafe &amp; Treat">Cafe &amp; Sweet Treat</option>
+              <option value="Must-Try Local">Must-Try Local</option>
+              <option value="Kid-Friendly">Kid-Friendly</option>
+              <option value="Festive / Upscale">Festive / Upscale</option>
+            </select>
+            <button id="btn-dining-favs" type="button" onclick="toggleDiningFavOnly()" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-100 transition">
+              ⭐ Saved Only (<span id="fav-dining-count">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Summary of Which Restaurants MUST Be Reserved -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 border-t border-slate-100">
+          <div class="bg-rose-50/80 border border-rose-200 rounded-xl p-3 text-xs">
+            <div class="font-bold text-rose-950">🔴 Reserve 3–5 Days Ahead (Essential!)</div>
+            <p class="text-rose-900/90 mt-0.5"><strong>Pizza 4P's Hanoi</strong> (43 Tràng Tiền / Lotte West Lake), <strong>Luk Lak</strong> (Dec 25 Christmas Dinner), <strong>Mango Mango</strong> (Dec 22 Full Moon balcony), and <strong>Morning Glory Signature</strong> (river window).</p>
+          </div>
+          <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-3 text-xs">
+            <div class="font-bold text-amber-950">🟡 Book 1–2 Days Ahead (Or Arrive 17:30)</div>
+            <p class="text-amber-900/90 mt-0.5"><strong>Chả Cá Thăng Long</strong> (6B Đường Thành), <strong>Home Hanoi Restaurant</strong>, and <strong>KOTO Van Mieu</strong> (ask Sheraton concierge to call ahead for your table).</p>
+          </div>
+          <div class="bg-emerald-50/80 border border-emerald-200 rounded-xl p-3 text-xs">
+            <div class="font-bold text-emerald-950">🟢 100% Walk-In Friendly (No Booking!)</div>
+            <p class="text-emerald-900/90 mt-0.5"><strong>Uncle Huan Coffee</strong> (all 3 Hoi An branches), <strong>Madam Khanh Banh Mi</strong>, <strong>Reaching Out Tea House</strong>, <strong>Cafe Giảng</strong>, and <strong>Phở Cuốn Hương Mai</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dining Cards Grid -->
+      <div id="dining-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Populated by renderDiningGrid() -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 4: SCAMS, GOTCHAS & SKIP LIST         -->
+    <!-- ========================================== -->
+    <section id="view-scams" class="hidden space-y-6">
+      <!-- Visual Alert: The #1 Vietnam Currency Trap -->
+      <div class="bg-gradient-to-br from-rose-950 via-slate-900 to-slate-900 text-white rounded-2xl p-5 border border-rose-500/30 card-shadow">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div class="space-y-2 max-w-2xl">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-400/30">
+              🚨 #1 Vietnam Cash Trap to Watch For
+            </span>
+            <h2 class="text-lg sm:text-xl font-bold">The "Blue Polymer Note" Lookalike Trap: 500,000 VND vs. 20,000 VND</h2>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Vietnam's highest bill (<strong>500,000 VND ≈ ₹1,667</strong>) and one of its smallest bills (<strong>20,000 VND ≈ ₹67</strong>) are <strong>both greenish-blue polymer</strong> with Ho Chi Minh's portrait. In dim night markets or taxis, tourists accidentally hand over a 500k note thinking it's 20k—or dishonest street vendors/cabbies swap your 500k note via sleight-of-hand and claim you handed them a 20k note!
+            </p>
+            <div class="text-xs text-amber-300 font-semibold pt-1">
+              ✅ Family Fix: Keep 500,000 VND notes in a separate zippered pocket. Whenever handing over a 200k or 500k note, say the amount out loud ("Five hundred thousand") and hold it under light before releasing it.
+            </div>
+          </div>
+          <!-- Visual Note Comparison Box -->
+          <div class="grid grid-cols-2 gap-3 shrink-0">
+            <div class="bg-cyan-900/60 border-2 border-cyan-400/50 rounded-xl p-3.5 text-center">
+              <div class="text-[10px] uppercase tracking-wider text-cyan-200 font-semibold">High Value Bill</div>
+              <div class="text-lg font-extrabold text-white mt-1">500,000 ₫</div>
+              <div class="text-xs font-bold text-amber-300">≈ ₹1,667 INR</div>
+              <div class="text-[11px] text-cyan-100 mt-1.5 bg-cyan-950/70 rounded px-2 py-1">Cyan-Teal • Larger (152mm) • 5 Zeros!</div>
+            </div>
+            <div class="bg-sky-900/60 border-2 border-sky-400/50 rounded-xl p-3.5 text-center">
+              <div class="text-[10px] uppercase tracking-wider text-sky-200 font-semibold">Low Value Bill</div>
+              <div class="text-lg font-extrabold text-white mt-1">20,000 ₫</div>
+              <div class="text-xs font-bold text-emerald-300">≈ ₹67 INR</div>
+              <div class="text-[11px] text-sky-100 mt-1.5 bg-sky-950/70 rounded px-2 py-1">Deep Blue • Shorter (136mm) • 4 Zeros</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scam Filter Bar -->
+      <div class="bg-white rounded-2xl p-4 border border-slate-200 card-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h3 class="text-base font-bold text-slate-900">🛡️ Regional Scams, Touts &amp; Gotchas Radar</h3>
+          <p class="text-xs text-slate-500">Filter by location to see exact street traps and how to counter them calmly.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-1.5">
+          <button id="scam-reg-all" type="button" onclick="setScamFilter('all')" class="scam-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition">All (12)</button>
+          <button id="scam-reg-hoian" type="button" onclick="setScamFilter('Hoi An')" class="scam-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Hoi An</button>
+          <button id="scam-reg-hanoi" type="button" onclick="setScamFilter('Hanoi')" class="scam-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Hanoi</button>
+          <button id="scam-reg-halong" type="button" onclick="setScamFilter('Ha Long Bay')" class="scam-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Ha Long Bay Cruise</button>
+          <button id="scam-reg-general" type="button" onclick="setScamFilter('All Vietnam')" class="scam-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Taxis &amp; Money</button>
+        </div>
+      </div>
+
+      <!-- Scams Grid -->
+      <div id="scams-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Populated by renderScamsGrid() -->
+      </div>
+
+      <!-- Must-Do vs. Skippable (>1 Hr Drive or Tourist Trap) Matrix -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow space-y-4">
+        <div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900">⚖️ What We Kept vs. What We Skipped (And Why)</h3>
+          <p class="text-xs sm:text-sm text-slate-600">
+            Designed around your rule: stay 100% immersed in Hoi An until your Dec 23 flight, never miss true cultural icons, and skip long highway slogs (&gt;1 hr drive) and commercial tourist traps.
+          </p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 text-slate-700 font-semibold">
+                <th class="py-3 px-3">Place / Experience</th>
+                <th class="py-3 px-3">Drive Time</th>
+                <th class="py-3 px-3">Verdict</th>
+                <th class="py-3 px-3">Why Travelers &amp; Your Family Plan Agree</th>
+              </tr>
+            </thead>
+            <tbody id="skip-matrix-body" class="divide-y divide-slate-200">
+              <!-- Populated by renderSkipMatrix() -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 5: CHEAPEST TICKETS & VND CALCULATOR  -->
+    <!-- ========================================== -->
+    <section id="view-tools" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left Column: Interactive VND <-> INR Converter -->
+        <div class="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200 card-shadow space-y-4">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">Mental Math: Drop 3 Zeros &amp; Divide by 3</span>
+            <h2 class="text-lg font-bold text-slate-900 mt-1">💴 Instant VND ↔ INR Converter</h2>
+            <p class="text-xs text-slate-500">Example: 300,000 VND → drop 3 zeros (300) ÷ 3 = <strong>₹1,000 INR</strong>.</p>
+          </div>
+
+          <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div>
+              <label for="vnd-amount-input" class="block text-xs font-semibold text-slate-700 mb-1">Vietnamese Đồng (VND ₫)</label>
+              <input id="vnd-amount-input" type="number" value="170000" min="0" step="1000" oninput="updateFromVnd(this.value)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-base font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+              <span>Exchange Rate Assumption:</span>
+              <div class="flex items-center gap-1.5">
+                <span>1 INR =</span>
+                <input id="rate-vnd-inr" type="number" value="300" min="100" max="600" step="5" oninput="updateExchangeRate(this.value)" class="w-16 px-2 py-0.5 rounded border border-slate-300 text-center font-semibold text-slate-800" />
+                <span>VND</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 pt-1">
+              <div class="bg-indigo-950 text-white rounded-xl p-3">
+                <div class="text-[11px] text-indigo-200">Indian Rupees (INR)</div>
+                <div id="calc-inr-output" class="text-xl font-extrabold text-amber-300 mt-0.5">₹567</div>
+              </div>
+              <div class="bg-slate-800 text-white rounded-xl p-3">
+                <div class="text-[11px] text-slate-300">US Dollars (Approx)</div>
+                <div id="calc-usd-output" class="text-xl font-extrabold text-emerald-300 mt-0.5">$6.80</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick-Tap Banknotes & Common Items -->
+          <div class="space-y-2">
+            <div class="text-xs font-semibold text-slate-600">Tap a Vietnam Banknote or Ticket:</div>
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" onclick="setVndPreset(20000)" class="px-2.5 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-semibold">20k ₫ Bill (₹67)</button>
+              <button type="button" onclick="setVndPreset(65000)" class="px-2.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-semibold">65k ₫ Uncle Huan (₹217)</button>
+              <button type="button" onclick="setVndPreset(90000)" class="px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 text-xs font-semibold">90k ₫ Basket Boat (₹300)</button>
+              <button type="button" onclick="setVndPreset(170000)" class="px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 text-xs font-semibold">170k ₫ Lantern Boat (₹567)</button>
+              <button type="button" onclick="setVndPreset(500000)" class="px-2.5 py-1.5 rounded-lg bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border border-cyan-300 text-xs font-bold">500k ₫ Blue Bill (₹1,667)</button>
+              <button type="button" onclick="setVndPreset(600000)" class="px-2.5 py-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 text-xs font-semibold">600k ₫ Memories Show (₹2,000)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Cheapest Ticket Sources & Advance Booking Rules -->
+        <div class="lg:col-span-8 bg-white rounded-2xl p-5 border border-slate-200 card-shadow space-y-4">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">🎟️ Cheapest Ticket Sources, Advance Booking Rules &amp; Maps</h2>
+            <p class="text-xs text-slate-600">
+              For private shows and boat rides, <strong>Klook / Direct Operator booking</strong> is cheaper than walk-up touts. For national monuments, the <strong>official walk-up government booth</strong> is always cheapest (and Katie is FREE under 15!).
+            </p>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-slate-200 bg-slate-50 text-slate-700 font-semibold">
+                  <th class="py-2.5 px-3">Attraction / Tour</th>
+                  <th class="py-2.5 px-3">Official / Best Price</th>
+                  <th class="py-2.5 px-3">Advance Booking Rule</th>
+                  <th class="py-2.5 px-3">Where to Buy Cheapest Ticket &amp; Map</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr>
+                  <td class="py-3 px-3 font-bold">Hoi An Memories Show (Day 2 • Sun Dec 20)</td>
+                  <td class="py-3 px-3 font-bold text-indigo-700">Eco: 600,000 ₫ (~₹2,000)<br/><span class="text-[11px] font-normal text-slate-500">Child (1m–1.4m): 200,000 ₫</span></td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-amber-100 text-amber-900 text-[11px]">🟡 Book 1–2 Days Ahead</span></td>
+                  <td class="py-3 px-3 space-y-1">
+                    <div><a href="https://www.klook.com/en-IN/activity/17514-hoi-an-memories-show-ticket/" target="_blank" rel="noopener" class="font-bold text-emerald-700 underline">🎟️ Buy Cheapest on Klook (5–10% Off + QR) ↗</a></div>
+                    <div><a href="https://hoianmemoriesshow.com/" target="_blank" rel="noopener" class="text-indigo-600 underline text-xs">Official Show Site ↗</a> • <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Memories+Land+200+Nguyen+Tri+Phuong+Hoi+An" target="_blank" rel="noopener" class="text-slate-600 underline text-xs">📍 Map ↗</a></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold">Cẩm Thanh Coconut Basket Boat (Day 4 • Tue Dec 22)</td>
+                  <td class="py-3 px-3 font-bold text-indigo-700">~85,000–90,000 ₫ (~₹290)<br/><span class="text-[11px] font-normal text-slate-500">Avoids 300k ₫ street touts!</span></td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-amber-100 text-amber-900 text-[11px]">🟡 Book 1 Day Ahead</span></td>
+                  <td class="py-3 px-3 space-y-1">
+                    <div><a href="https://www.klook.com/en-IN/activity/24274-basket-boat-ticket-hoi-an-coconut-forest/" target="_blank" rel="noopener" class="font-bold text-emerald-700 underline">🎟️ Buy Cheapest on Klook (~₹290 Instant) ↗</a></div>
+                    <div><a href="https://www.hacoconut.com/" target="_blank" rel="noopener" class="text-indigo-600 underline text-xs">Hacoconut Direct ↗</a> • <a href="https://www.google.com/maps/search/?api=1&query=Hacoconut+Coconut+Basket+Boat+Tour+Hoi+An" target="_blank" rel="noopener" class="text-slate-600 underline text-xs">📍 Map ↗</a></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold">Hoài River Lantern Sampan Boat (Day 4 • Tue Dec 22)</td>
+                  <td class="py-3 px-3 font-bold text-indigo-700">170,000 ₫ (~₹567 total)<br/><span class="text-[11px] font-normal text-slate-500">Flat rate for all 3 of you</span></td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-900 text-[11px]">🟢 Walk-Up at 17:15</span></td>
+                  <td class="py-3 px-3 space-y-1">
+                    <div class="text-xs text-slate-700"><strong>🏆 Cheapest at Official Riverfront Booth</strong> (Bạch Đằng / Nguyễn Phúc Chu—skip online markups &amp; street touts).</div>
+                    <div><a href="https://www.google.com/maps/search/?api=1&query=Hoai+River+Boat+Dock+Bach+Dang+Hoi+An" target="_blank" rel="noopener" class="text-indigo-600 font-bold underline text-xs">📍 Official Pier on Google Maps ↗</a></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold">Hoi An Ancient Town Heritage Ticket (Day 2)</td>
+                  <td class="py-3 px-3 font-bold text-indigo-700">120,000 ₫ (~₹400 / adult)<br/><span class="text-[11px] font-bold text-emerald-700">Katie is FREE (under 15)</span></td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-900 text-[11px]">🟢 Walk-Up Kiosk</span></td>
+                  <td class="py-3 px-3 space-y-1">
+                    <div class="text-xs text-slate-700"><strong>🏆 Cheapest at Official Yellow Kiosk</strong> near Japanese Covered Bridge (valid all 4 days).</div>
+                    <div><a href="https://www.google.com/maps/search/?api=1&query=Japanese+Covered+Bridge+Hoi+An" target="_blank" rel="noopener" class="text-indigo-600 font-bold underline text-xs">📍 Ticket Kiosk on Google Maps ↗</a></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold">Private Old Quarter Street Food Walk (Day 6 • Dec 24)</td>
+                  <td class="py-3 px-3 font-bold text-indigo-700">~$25–$35 USD / pax<br/><span class="text-[11px] font-normal text-slate-500">Includes 6–7 dishes + Egg Coffee</span></td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-rose-100 text-rose-900 text-[11px]">🔴 Reserve 3–5 Days Ahead</span></td>
+                  <td class="py-3 px-3 space-y-1">
+                    <div><a href="https://www.hanoistreetfoodtour.com/" target="_blank" rel="noopener" class="font-bold text-emerald-700 underline">🎟️ Book Direct at HanoiStreetFoodTour.com ↗</a></div>
+                    <div><a href="https://www.google.com/maps/search/?api=1&query=Hanoi+Street+Food+Tour+78A+Tran+Nhat+Duat+Hanoi" target="_blank" rel="noopener" class="text-slate-600 underline text-xs">📍 Meeting Point Map ↗</a></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold">Hanoi Vintage Open-Air Army Jeep Tour (Day 9 • Dec 27)</td>
+                  <td class="py-3 px-3 font-bold text-indigo-700">~1,250,000 ₫ (~$49 / adult)<br/><span class="text-[11px] font-normal text-slate-500">Pickup at Sheraton Hanoi</span></td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-rose-100 text-rose-900 text-[11px]">🔴 Reserve 3–5 Days Ahead</span></td>
+                  <td class="py-3 px-3 space-y-1">
+                    <div><a href="https://hanoibackstreettours.com/product-category/hanoi-jeep-tours/" target="_blank" rel="noopener" class="font-bold text-emerald-700 underline">🎟️ Book Direct at HanoiBackstreetTours.com ↗</a></div>
+                    <div><a href="https://www.booking.com/attractions/vn/prhsz6wpkssf-hanoi-jeep-tour-hightlights-hidden-gems-by-vietnam-army-jeep.en-gb.html" target="_blank" rel="noopener" class="text-indigo-600 underline text-xs">Compare on Booking.com ↗</a></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold">Thăng Long Water Puppet Theatre (Day 9 • Sun Dec 27)</td>
+                  <td class="py-3 px-3 font-bold text-indigo-700">100,000–200,000 ₫ (~₹335–₹665)</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-rose-100 text-rose-900 text-[11px]">🔴 Reserve 3–5 Days Ahead</span></td>
+                  <td class="py-3 px-3 space-y-1">
+                    <div><a href="https://www.klook.com/en-IN/activity/35653-thang-long-water-puppet-show-ticket-hanoi/" target="_blank" rel="noopener" class="font-bold text-emerald-700 underline">🎟️ Book Skip-the-Line QR on Klook ↗</a></div>
+                    <div class="text-[11px] text-slate-500">Or ask Sheraton Concierge to buy 200k ₫ VIP front-row tickets at box office (<a href="https://www.google.com/maps/search/?api=1&query=Thang+Long+Water+Puppet+Theatre+57B+Dinh+Tien+Hoang+Hanoi" target="_blank" rel="noopener" class="underline">📍 Map ↗</a>).</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold">Temple of Literature, Imperial Citadel &amp; Ethnology Museum</td>
+                  <td class="py-3 px-3 font-bold text-indigo-700">70k ₫ / 100k ₫ / 40k ₫<br/><span class="text-[11px] font-bold text-emerald-700">Katie FREE at Temple &amp; Citadel</span></td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-900 text-[11px]">🟢 Walk-In Gate Ticket</span></td>
+                  <td class="py-3 px-3 text-xs text-slate-700">
+                    <strong>🏆 Buy at Official Entrance Gate Only</strong> (online sites charge 3x markup for state monuments).
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 6: TICKETED VAULT & TAILORING TRACKER -->
+    <!-- ========================================== -->
+    <section id="view-vault" class="hidden space-y-6">
+      <!-- Confirmed Ticketed Bookings Grid -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">🎫 100% Ticketed Bookings Vault (Tap Any Ref to Copy)</h2>
+            <p class="text-xs text-slate-600">Synced directly from your TripIt plan and confirmation emails, with Google Maps links for every hotel and port.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <a href="https://sites.google.com/view/sandykatiejerry-vietnam2026/full-page-embed" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">
+              🌐 Published Family Site ↗
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1tbYtqNxgX41wBsa764dPJx91d5OwE_1RIXFAezqhBSE/edit" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition">
+              📊 Open Master Google Sheet ↗
+            </a>
+          </div>
+        </div>
+
+        <div id="vault-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Populated by renderVaultCards() -->
+        </div>
+      </div>
+
+      <!-- 3-Step Hoi An Tailoring Tracker -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 card-shadow space-y-4">
+        <div>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900">48-Hour Bespoke Rule • Walk-In or Message 1 Day Ahead</span>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-1">✂️ Hoi An Custom Tailoring Tracker (Dec 20–22)</h3>
+          <p class="text-xs sm:text-sm text-slate-600">
+            Top houses:
+            <a href="http://www.bebetailor.com/" target="_blank" rel="noopener" class="text-indigo-600 font-semibold underline">BeBe Tailor</a> (<a href="https://www.google.com/maps/search/?api=1&query=BeBe+Tailor+05+Hoang+Dieu+Hoi+An" target="_blank" rel="noopener" class="text-slate-600 underline">📍 05–07 Hoàng Diệu Map ↗</a>),
+            <a href="http://www.adongsilk.com/" target="_blank" rel="noopener" class="text-indigo-600 font-semibold underline">A Dong Silk</a> (<a href="https://www.google.com/maps/search/?api=1&query=A+Dong+Silk+40+Le+Loi+Hoi+An" target="_blank" rel="noopener" class="text-slate-600 underline">📍 40 Lê Lợi Map ↗</a> — right next to Uncle Huan Coffee!), or
+            <a href="https://yalycouture.com/" target="_blank" rel="noopener" class="text-indigo-600 font-semibold underline">Yaly Couture</a> (<a href="https://www.google.com/maps/search/?api=1&query=Yaly+Couture+47+Tran+Phu+Hoi+An" target="_blank" rel="noopener" class="text-slate-600 underline">📍 47 Trần Phú Map ↗</a>).
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/70 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-xs font-bold bg-indigo-100 text-indigo-900">Step 1 • Sun, Dec 20 (10:00 AM)</span>
+              <input id="tailor-step-1" type="checkbox" onchange="toggleChecklist('tailor-step-1')" class="w-4 h-4 accent-indigo-600 rounded cursor-pointer" />
+            </div>
+            <div class="font-bold text-sm text-slate-900">Fabric, Cut &amp; Full Measurements</div>
+            <p class="text-xs text-slate-600">No advance deposit needed—walk right in at 10:00 AM! Show 2–3 saved reference photos, ask for breathable Bemberg/viscose suit lining, then celebrate next door with Egg &amp; Salted Coffee at Uncle Huan.</p>
+          </div>
+
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/70 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-900">Step 2 • Mon, Dec 21 (17:00 PM)</span>
+              <input id="tailor-step-2" type="checkbox" onchange="toggleChecklist('tailor-step-2')" class="w-4 h-4 accent-indigo-600 rounded cursor-pointer" />
+            </div>
+            <div class="font-bold text-sm text-slate-900">First Basted Fitting (20–30 Mins)</div>
+            <p class="text-xs text-slate-600">Wear the exact shoes/heel height you'll wear with the garment. Sit down, cross your arms, and check shoulder divots and trouser waist comfort while sitting.</p>
+          </div>
+
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/70 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-900">Step 3 • Tue, Dec 22 (15:30 PM)</span>
+              <input id="tailor-step-3" type="checkbox" onchange="toggleChecklist('tailor-step-3')" class="w-4 h-4 accent-indigo-600 rounded cursor-pointer" />
+            </div>
+            <div class="font-bold text-sm text-slate-900">Final Try-On &amp; Hotel Delivery</div>
+            <p class="text-xs text-slate-600">If any micro-tweak is needed, you still have all of Wednesday, Dec 23 until 15:45 before your 18:45 flight! Have the shop steam and deliver in garment bags to Laluna Hoi An concierge.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 mt-10 py-5 px-4 sm:px-6 text-center text-xs text-slate-500">
+    Built for Jerome, Sandra &amp; Katie's December 19–30, 2026 Vietnam Family Vacation • Google Maps Links, Cheapest Ticket Sources, Advance Reservation Rules &amp; Sticky Mobile Day Strip.
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- APPLICATION DATA & INTERACTIVE LOGIC       -->
+  <!-- ========================================== -->
+  <script>
+    function loadSavedState(key, fallback) {
+      try {
+        var raw = window.localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function saveState(key, val) {
+      try {
+        window.localStorage.setItem(key, JSON.stringify(val));
+      } catch (e) {
+        // Ignore storage errors in restricted iframes
+      }
+    }
+
+    var appState = {
+      activeView: 'itinerary',
+      regionFilter: 'all',
+      selectedDay: 1,
+      displayMode: 'single',
+      sectionFilter: 'all',
+      searchQuery: '',
+      diningCity: 'all',
+      diningTag: 'all',
+      diningFavOnly: false,
+      scamRegion: 'all',
+      vndAmount: 170000,
+      vndPerInr: 300,
+      checkedItems: loadSavedState('vn2026_checked_v4', {}),
+      favDining: loadSavedState('vn2026_fav_dining_v4', {})
+    };
+
+    // 12-Day Grounded Itinerary Dataset with Google Maps Links, Cheapest Ticket Links & Advance Booking Badges
+    var ITINERARY_DAYS = [
+      {
+        day: 1,
+        date: 'Sat, Dec 19',
+        shortTitle: 'Arrive Hoi An Riverside',
+        title: 'Mumbai to Da Nang Airport & Direct Coastal Transfer to Hoi An',
+        region: 'hoian',
+        regionLabel: '100% Hoi An',
+        hotel: 'Laluna Hoi An Riverside Hotel & Spa (Conf #QSW792921)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Laluna+Hoi+An+Riverside+Hotel+and+Spa+12+Nguyen+Du+Hoi+An',
+        driveBadge: '45-min airport transfer straight to Hoi An',
+        weatherTip: '21°C–24°C evening river breeze • Keep light jackets in carry-on',
+        activities: [
+          {
+            id: 'd1-a1',
+            time: '02:40 AM – 08:25 AM',
+            title: 'Fly Mumbai (BOM T2) → Bangkok (BKK) on Thai Airways TG 352',
+            detail: 'Confirmed PNR E3ESML (Economy K, 23 kg checked bag per person). Bags are checked straight through to Da Nang (DAD).',
+            mustDo: true,
+            resBadge: '✅ Ticketed (PNR E3ESML)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Chhatrapati+Shivaji+Maharaj+International+Airport+Terminal+2+Mumbai'
+          },
+          {
+            id: 'd1-a2',
+            time: '08:25 AM – 06:00 PM',
+            title: 'Transit Bangkok Suvarnabhumi (BKK) & Fly TG 594 (16:15 → 18:00 DAD)',
+            detail: 'Daytime layover in Bangkok. Board Thai Airways TG 594 at 16:15, landing at Da Nang International Airport (DAD Terminal 2) at 18:00.',
+            mustDo: true,
+            resBadge: '✅ Ticketed (PNR E3ESML)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Airport+Terminal+2'
+          },
+          {
+            id: 'd1-a3',
+            time: '06:45 PM – 07:45 PM',
+            title: 'Direct Coastal Transfer to Laluna Hoi An Riverside Hotel & Spa',
+            detail: 'Skip Da Nang city entirely—head straight from Terminal 2 arrivals in a pre-booked private car (45 mins, ~320,000–350,000 VND / ₹1,100) to 12 Nguyễn Du Street on the Hoài River in Hoi An.',
+            mustDo: true,
+            resBadge: '🟡 Book Airport Car 24–48h Ahead',
+            resType: 'rec',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Laluna+Hoi+An+Riverside+Hotel+and+Spa+12+Nguyen+Du+Hoi+An',
+            ticketLabel: '🎟️ Book Cheapest Private Airport Car on Klook (~₹1,050) ↗',
+            ticketUrl: 'https://www.klook.com/en-US/destination/c75-hoi-an/1-things-to-do/'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Arrival Dinner (~8:00 PM)',
+            spot: 'Cargo Club Cafe & Patisserie (107 Nguyễn Thái Học)',
+            detail: 'Just a 4-minute walk along the river from Laluna. Easy comfort food after travel: fresh Vietnamese spring rolls, Cao Lầu, wood-fired pasta/pastries for Katie, and homemade gelato.',
+            resBadge: '🟢 Walk-In Friendly (No Reservation Needed)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cargo+Club+Cafe+and+Restaurant+107+Nguyen+Thai+Hoc+Hoi+An',
+            link: 'https://www.vietnamtourism.com/en/morning-glory-restaurant-in-hoi-an-what-to-order-prices',
+            linkLabel: 'Menu & Guide ↗'
+          }
+        ],
+        hacks: [
+          'Pre-book your Da Nang Airport → Laluna Hoi An private car (~320,000–350,000 VND / ₹1,100) so a driver is holding your nameboard at Terminal 2 arrivals—faster and cheaper than haggling at the curb.',
+          'At Da Nang Airport ATM, withdraw 2,000,000–3,000,000 VND and break one 500,000 VND note at an airport snack counter so you have small 20k/50k notes ready.'
+        ],
+        scams: [
+          'Fake "Grab" Drivers at Da Nang Airport Arrival Curb: Men holding laminated Grab logos outside Terminal 2 will quote 500,000–600,000 VND to Hoi An. Never follow walk-up touts—either use your pre-booked hotel driver or book inside the official Grab app and check the license plate.'
+        ]
+      },
+      {
+        day: 2,
+        date: 'Sun, Dec 20',
+        shortTitle: 'Tailoring, Uncle Huan & Ancient Town',
+        title: '100% Hoi An Immersion: Tailoring Kickoff, Uncle Huan Coffee, Ancient Town & Memories Show',
+        region: 'hoian',
+        regionLabel: '100% Hoi An',
+        hotel: 'Laluna Hoi An Riverside Hotel & Spa (Conf #QSW792921)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Laluna+Hoi+An+Riverside+Hotel+and+Spa+12+Nguyen+Du+Hoi+An',
+        driveBadge: '100% Walkable from Laluna (Zero Highway Driving!)',
+        weatherTip: 'Pleasant 23°C • All sights within 5–10 mins of your hotel',
+        activities: [
+          {
+            id: 'd2-a1',
+            time: '10:00 AM – 11:30 AM',
+            title: 'Step 1 Custom Tailoring: Fabric & Measurements (BeBe Tailor or A Dong Silk)',
+            detail: 'Walk 6–8 mins from Laluna to BeBe Tailor (05–07 Hoàng Diệu) or A Dong Silk (40 Lê Lợi, right by Uncle Huan!). Pick fabrics, linings, and cuts on morning #1 so your first fitting is ready Monday afternoon.',
+            mustDo: true,
+            resBadge: '🟢 Walk-In Friendly (No Deposit Needed Prior)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=BeBe+Tailor+05+Hoang+Dieu+Hoi+An',
+            ticketLabel: '✂️ Official BeBe Tailor Website ↗',
+            ticketUrl: 'http://www.bebetailor.com/'
+          },
+          {
+            id: 'd2-a2',
+            time: '11:45 AM – 01:30 PM',
+            title: 'Banh Mi Lunch + Signature Tree Latte Art at Uncle Huan Coffee!',
+            detail: 'Grab crispy baguettes at Madam Khanh, then relax at Uncle Huan Coffee (675 Hai Bà Trưng or 61 Lê Lợi — 4.9★ across 4,222 reviews). Famous for the "World\'s Most Beautiful Coffee," where baristas hand-etch intricate Hoi An trees onto velvety Salted Coffee, Egg Coffee, Iced Coconut Coffee, and hot cocoa for Katie!',
+            mustDo: true,
+            resBadge: '🟢 Walk-In Friendly (Upstairs A/C Balcony)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Uncle+Huan+Coffee+675+Hai+Ba+Trung+Hoi+An',
+            ticketLabel: '☕ Uncle Huan Coffee Guide & Menu ↗',
+            ticketUrl: 'https://vietnamtour247.com/uncle-huan-coffee-hoi-an/'
+          },
+          {
+            id: 'd2-a3',
+            time: '02:30 PM – 05:15 PM',
+            title: 'UNESCO Hoi An Ancient Town Walk (Japanese Bridge, Tân Kỳ House & Phúc Kiến Hall)',
+            detail: 'Walk 350m from Laluna to the newly restored 16th-century Japanese Covered Bridge (Chùa Cầu), explore the 200-year-old Tân Kỳ Merchant House, and visit the ornate Phúc Kiến Assembly Hall.',
+            mustDo: true,
+            resBadge: '🟢 Walk-Up Official Kiosk (120k ₫ Adult / Katie FREE)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Japanese+Covered+Bridge+Hoi+An'
+          },
+          {
+            id: 'd2-a4',
+            time: '07:30 PM – 09:00 PM',
+            title: 'Hoi An Memories Land & Outdoor River Spectacle (Cồn Hến Island)',
+            detail: 'Cross the Moon Bridge onto Hoi An\'s river island for Vietnam\'s largest outdoor visual show: 500+ performers in glowing áo dài on a 25,000 m² water stage telling 400 years of Hoi An history (main show 20:00–21:00; open Sunday nights!).',
+            mustDo: true,
+            resBadge: '🟡 Book 1–2 Days Ahead (Saves 5–10% + Skips Ticket Line)',
+            resType: 'rec',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hoi+An+Memories+Land+200+Nguyen+Tri+Phuong+Hoi+An',
+            ticketLabel: '🎟️ Buy Cheapest Show Ticket on Klook (Instant QR) ↗',
+            ticketUrl: 'https://www.klook.com/en-IN/activity/17514-hoi-an-memories-show-ticket/'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Midday Coffee & Art Experience (Must-Visit!)',
+            spot: 'Uncle Huan Coffee (675 Hai Bà Trưng OR 61 Lê Lợi, Old Town)',
+            detail: 'Hoi An\'s highest-rated café (4.9★, 4,222+ reviews). Order Signature Egg Coffee (Cà phê trứng), Salted Coffee (Cà phê muối), or Iced Coconut Coffee (45,000–85,000 VND / ₹150–₹285) topped with hand-drawn tree foliage art!',
+            resBadge: '🟢 Walk-In Friendly (No Reservation Needed)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Uncle+Huan+Coffee+675+Hai+Ba+Trung+Hoi+An',
+            link: 'https://vietnamtour247.com/uncle-huan-coffee-hoi-an/',
+            linkLabel: 'Uncle Huan Menu & Guide ↗'
+          },
+          {
+            meal: 'Lunch & Pre-Show Dinner (Hoi An Old Town)',
+            spot: 'Madam Khanh – The Banh Mi Queen (115 Trần Cao Vân) & Vy\'s Market Restaurant (3 Nguyễn Hoàng)',
+            detail: 'Legendary crispy Hoi An baguette sandwiches for lunch (35,000 VND / ₹115), and interactive Vietnamese street-food counters at Vy\'s Market before the 20:00 Memories Show.',
+            resBadge: '🟢 Walk-In Friendly (Both Spots)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Madam+Khanh+The+Banh+Mi+Queen+115+Tran+Cao+Van+Hoi+An',
+            link: 'https://www.trip.com/moments/theme/poi-uncle-huan-coffee-152859648-restaurant-993134/',
+            linkLabel: 'View Food Reviews ↗'
+          }
+        ],
+        hacks: [
+          'Cheapest Ticket Tip for Hoi An Memories Show: Booking Eco/High seats on Klook 1–2 days ahead gives you an instant mobile QR code and is ~5–10% cheaper than the walk-up box office. Note: Children under 1.4m pay half-price (200,000 VND Eco).',
+          'At Uncle Huan Coffee, head up the wooden staircase to the air-conditioned 2nd-floor balcony overlooking the yellow heritage roofs, and ask the barista to draw custom latte art on Katie\'s cocoa or coconut smoothie!'
+        ],
+        scams: [
+          'Hoi An Old Town Heritage Ticket Booth Rule: Buy the official Old Town Heritage Ticket (120,000 VND / adult, Katie FREE) ONLY at the official yellow government kiosk by the Japanese Covered Bridge—never buy bundled "Old Town walk tickets" on third-party sites that charge 3x.',
+          'Avoid Fake "Tailor Guides" on the Street: Only walk directly into verified flagship stores (BeBe Tailor, A Dong Silk, Yaly Couture)—never follow street touts offering "50% off family tailor shops" down side alleys.'
+        ]
+      },
+      {
+        day: 3,
+        date: 'Mon, Dec 21',
+        shortTitle: 'Silk, Pottery & Lantern Making',
+        title: 'Living Hoi An Crafts: Silk Weaving, Pottery Kick-Wheel & Foldable Lanterns',
+        region: 'hoian',
+        regionLabel: '100% Hoi An',
+        hotel: 'Laluna Hoi An Riverside Hotel & Spa (Conf #QSW792921)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Laluna+Hoi+An+Riverside+Hotel+and+Spa+12+Nguyen+Du+Hoi+An',
+        driveBadge: 'All stops 5–15 mins from Laluna (Zero long drives)',
+        weatherTip: 'Comfortable 23°C daytime • Great for outdoor courtyards',
+        activities: [
+          {
+            id: 'd3-a1',
+            time: '09:00 AM – 11:00 AM',
+            title: 'Hoi An Silk Village (28 Nguyễn Tất Thành)',
+            detail: '5 minutes from Old Town. Katie can feed mulberry leaves to live silkworms, watch cocoons being unwound in hot water pots, and see Chăm-style wooden looms weaving authentic Vietnamese silk.',
+            mustDo: true,
+            resBadge: '🟢 Walk-In Friendly (Buy Ticket at Gate)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hoi+An+Silk+Village+28+Nguyen+Tat+Thanh+Hoi+An'
+          },
+          {
+            id: 'd3-a2',
+            time: '02:00 PM – 04:00 PM',
+            title: 'Thanh Hà Pottery Village (Hands-On Clay Kick-Wheel for Katie)',
+            detail: '10 minutes west along the Thu Bồn River from Laluna. Centuries-old terracotta village (35,000 VND official village entry includes a ceramic souvenir + kick-wheel pottery try for Katie!).',
+            mustDo: true,
+            resBadge: '🟢 Walk-In Friendly (Official Booth: 35,000 ₫)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Thanh+Ha+Pottery+Village+Hoi+An'
+          },
+          {
+            id: 'd3-a3',
+            time: '04:15 PM – 05:45 PM',
+            title: 'Foldable Silk Lantern Workshop + Step 2 Tailoring Fitting (17:00)',
+            detail: 'Craft your own collapsible bamboo-and-silk lantern that folds flat into your suitcase (~150,000–200,000 VND/lantern), then pop into your tailor at 17:00 for your 20-minute first basted fitting.',
+            mustDo: true,
+            resBadge: '🟡 Book Workshop 1 Day Ahead (Or Walk In)',
+            resType: 'rec',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ha+Linh+Lantern+Making+Class+72+Tran+ek+Tong+Hoi+An',
+            ticketLabel: '🏮 Browse Lantern Class Options on Klook ↗',
+            ticketUrl: 'https://www.klook.com/en-US/destination/c75-hoi-an/1-things-to-do/'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Dinner (An Hoi Islet — 3 mins from Laluna)',
+            spot: 'Morning Glory Signature (41 Nguyễn Phúc Chu)',
+            detail: 'Chef Ms. Vy\'s flagship riverside restaurant looking across to the Japanese Bridge. Must-order: White Rose shrimp dumplings, Cao Lầu noodles, crispy Hoi An pancakes (Bánh Xèo), and chicken rice.',
+            resBadge: '🔴 Reserve 2–3 Days Ahead (For Riverside Balcony Table!)',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Morning+Glory+Signature+41+Nguyen+Phuc+Chu+Hoi+An',
+            link: 'https://beta.tastevietnam.asia/',
+            linkLabel: 'Reserve Online at TasteVietnam.asia ↗'
+          },
+          {
+            meal: 'Afternoon Tea Break',
+            spot: 'Reaching Out Tea House (131 Trần Phú)',
+            detail: 'A peaceful heritage teahouse run by hearing- and speech-impaired artisans in Old Town. You order Vietnamese oolong tea and coconut biscuits using wooden blocks in tranquil silence.',
+            resBadge: '🟢 Walk-In Friendly (No Reservation Needed)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Reaching+Out+Teahouse+131+Tran+Phu+Hoi+An',
+            link: 'https://hoianit.com/best-cafe-hoi-an/',
+            linkLabel: 'Cafe Guide ↗'
+          }
+        ],
+        hacks: [
+          'Why You Should Reserve Morning Glory Signature: Ground-floor tables take walk-ins at lunch, but the coveted 2nd-floor riverfront balcony tables for dinner book out 2–3 days ahead via tastevietnam.asia (or call +84 235 224 1555).',
+          'When making your lantern at the workshop, choose the "Foldable / Collapsible" frame option rather than the rigid frame—it collapses like an umbrella so you can pack 2–3 lanterns inside your checked bag on IndiGo without crushing them.'
+        ],
+        scams: [
+          'The "Free Fruit Basket / Shoulder-Pole Photo" Trap in Old Town: Friendly women in conical hats walking around Trần Phú street will smile and place their bamboo fruit yoke on your or Katie\'s shoulders for a "free photo," then aggressively demand 100,000–200,000 VND for a tiny bag of pineapple. Politely smile, say "Không, cảm ơn" (No, thank you), and never touch the bamboo pole.'
+        ]
+      },
+      {
+        day: 4,
+        date: 'Tue, Dec 22',
+        shortTitle: 'Basket Boats & Full Moon Festival',
+        title: 'Trà Quế Herb Village, Coconut Basket Boats & Full Moon Lantern Festival!',
+        region: 'hoian',
+        regionLabel: '100% Hoi An',
+        hotel: 'Laluna Hoi An Riverside Hotel & Spa (Conf #QSW792921)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Laluna+Hoi+An+Riverside+Hotel+and+Spa+12+Nguyen+Du+Hoi+An',
+        driveBadge: '15 mins to Tra Que & Cam Thanh • Walk to Festival',
+        weatherTip: 'Full Moon Night (14th Lunar Day) • Streets close to traffic at 17:00',
+        activities: [
+          {
+            id: 'd4-a1',
+            time: '09:00 AM – 11:30 AM',
+            title: 'Trà Quế Organic Herb Village (Cycling & Herbal Footbath)',
+            detail: '15 minutes from Old Town. Stroll or cycle along quiet paths past emerald basil, mint, and cilantro beds fertilized with river seaweed (official village entry: 35,000 VND at the gate).',
+            mustDo: true,
+            resBadge: '🟢 Walk-In Friendly (35,000 ₫ Gate Ticket)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Tra+Que+Vegetable+Village+Hoi+An'
+          },
+          {
+            id: 'd4-a2',
+            time: '02:00 PM – 03:30 PM',
+            title: 'Cẩm Thanh Coconut Palm Forest (Round Bamboo Basket Boats)',
+            detail: 'Paddle through shady nipa palm water channels in traditional woven bamboo basket boats (thuyền thúng) with Hacoconut. Katie can fish for tiny purple crabs with a bamboo pole!',
+            mustDo: true,
+            resBadge: '🟡 Book 1 Day Ahead on Klook (~85k ₫ vs 300k ₫ Touts!)',
+            resType: 'rec',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hacoconut+Coconut+Basket+Boat+Tour+Hoi+An',
+            ticketLabel: '🎟️ Buy Cheapest Basket Boat Ticket on Klook (~₹290) ↗',
+            ticketUrl: 'https://www.klook.com/en-IN/activity/24274-basket-boat-ticket-hoi-an-coconut-forest/'
+          },
+          {
+            id: 'd4-a3',
+            time: '03:45 PM – 04:30 PM',
+            title: 'Step 3 Final Tailoring Fitting & Garment Inspection',
+            detail: 'Try on your finished, pressed suits/dresses. Once approved, ask the tailor to deliver the garment bags directly to Laluna Hoi An concierge so your hands are free for the festival.',
+            mustDo: true,
+            resBadge: '✅ Scheduled with Tailor',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=BeBe+Tailor+05+Hoang+Dieu+Hoi+An'
+          },
+          {
+            id: 'd4-a4',
+            time: '05:30 PM – 09:00 PM',
+            title: 'Hoi An Monthly Full Moon Lantern Festival & Sampan Boat Release',
+            detail: 'Tonight is the 14th day of the lunar month! Fluorescent lights are switched off across Old Town, silk lanterns glow along every shophouse, and you board a wooden sampan on the Hoài River to release floating paper flower candles.',
+            mustDo: true,
+            resBadge: '🟢 Official Pier Walk-Up at 17:15 (170,000 ₫ Total for 3)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hoai+River+Boat+Dock+Bach+Dang+Hoi+An',
+            ticketLabel: '🏮 Lantern Boat Official Pricing Guide ↗',
+            ticketUrl: 'https://hoiandaytrip.com/hoi-an-lantern-boat-ride/'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Lunch',
+            spot: 'Banh Mi Phuong (2B Phan Chu Trinh) or Baby Mustard (Trà Quế)',
+            detail: 'Made famous by Anthony Bourdain—crispy baguettes stuffed with herbs, grilled meats, or tofu/egg, or fresh garden spring rolls right inside Trà Quế village.',
+            resBadge: '🟢 Walk-In Friendly (Fast Queue)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Banh+Mi+Phuong+2B+Phan+Chu+Trinh+Hoi+An',
+            link: 'https://madmonkeyhostels.com/blogs/blogs-travel-guide-vietnam-travel-best-places-to-eat-in-hoi-an-a-foodies-guide-to-culinary-bliss/',
+            linkLabel: 'Foodie Guide ↗'
+          },
+          {
+            meal: 'Festival Evening Dinner (Full Moon Night!)',
+            spot: 'Mango Mango (45 Nguyễn Phúc Chu)',
+            detail: 'Right by the Japanese Bridge footbridge—an upper-balcony table lets you look down over thousands of glowing river lanterns while eating dinner away from the street crowds.',
+            resBadge: '🔴 Reserve 2–3 Days Ahead (Essential on Full Moon Night!)',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Mango+Mango+45+Nguyen+Phuc+Chu+Hoi+An',
+            link: 'https://www.mangomangohoian.com/bookings',
+            linkLabel: 'Reserve Balcony Table Online ↗'
+          }
+        ],
+        hacks: [
+          'Board Your Lantern Boat at 17:15–17:30 (Blue Hour Dusk): On Full Moon Festival night, boat queues triple by 19:00. Boarding right at 17:15 at the official Bạch Đằng yellow booth (170,000 VND flat rate for 1–3 pax) gives you magical twilight photos and zero wait.',
+          'Book your Mango Mango upstairs balcony table at mangomangohoian.com/bookings at least 48–72 hours before Dec 22 so you have a front-row aerial view of the Full Moon Lantern Festival!'
+        ],
+        scams: [
+          'Hoai River Lantern Boat Touts vs. Official Ticket Booth: Street touts near the bridge will quote 300,000–500,000 VND for a boat ride. Walk past them to the official uniformed ticket booth on Bạch Đằng / Nguyễn Phúc Chu street: the official fixed price is strictly 170,000 VND total for 1–3 people (~₹567) for a 20-minute ride.',
+          'Cam Thanh Roadside Scooter Wavers: As your car approaches Cam Thanh Coconut Village, people on scooters will wave at your driver pretending to be official parking guides to steer you into commission-heavy entrances charging 300,000+ VND/person. Pre-buy your Klook voucher (~₹290) and navigate directly to Hacoconut.'
+        ]
+      },
+      {
+        day: 5,
+        date: 'Wed, Dec 23',
+        shortTitle: 'An Bang Beach, Uncle Huan & Fly HAN',
+        title: 'An Bàng Beach Stroll, Farewell Uncle Huan Garden Coffee & Evening Flight to Hanoi',
+        region: 'hoian',
+        regionLabel: 'Hoi An → Hanoi',
+        hotel: 'Sheraton Hanoi Hotel (Conf #73088468 • 77,775 Bonvoy Pts)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi',
+        driveBadge: '10m to An Bang • 45m to DAD Airport at 15:45 • 1h 20m Flight',
+        weatherTip: 'Hanoi is cooler (15°C–20°C evening) • Pull out sweaters before landing',
+        activities: [
+          {
+            id: 'd5-a1',
+            time: '09:00 AM – 12:30 PM',
+            title: 'Unhurried Morning at An Bàng Beach (Hoi An Coast) & Late Check-Out',
+            detail: 'Because your flight is at 18:45, you have a full bonus day in Hoi An! Take a 10-minute ride to Hoi An\'s own quiet An Bàng Beach for a morning beach walk, then check out of Laluna at 11:00–12:00 (leave bags with concierge).',
+            mustDo: false,
+            resBadge: '🟢 Walk-In Friendly (Free Beach Access)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=An+Bang+Beach+Hoi+An'
+          },
+          {
+            id: 'd5-a2',
+            time: '01:30 PM – 03:15 PM',
+            title: 'Farewell Hoi An Lounge at Uncle Huan Coffee & Garden (71/26 Phan Châu Trinh)',
+            detail: 'Spend a peaceful final afternoon in Hoi An at Uncle Huan Coffee & Garden (or the 675 Hai Bà Trưng flagship)—sipping Iced Coconut Coffee, Salted Coffee, or Uncle Huan Iced Tea in a shaded green courtyard before your airport car arrives.',
+            mustDo: true,
+            resBadge: '🟢 Walk-In Friendly (Spacious Garden Courtyard)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Uncle+Huan+Coffee+and+Garden+71/26+Phan+Chau+Trinh+Hoi+An',
+            ticketLabel: '☕ Hoi An Best Garden Cafe Guide ↗',
+            ticketUrl: 'https://hoianit.com/best-cafe-hoi-an/'
+          },
+          {
+            id: 'd5-a3',
+            time: '03:45 PM – 08:05 PM',
+            title: 'Direct Transfer to Da Nang Airport (DAD T1) & Fly Sun PhuQuoc 934 (18:45 → 20:05 HAN)',
+            detail: 'Depart Laluna Hoi An at 15:45 straight to Da Nang Domestic Terminal (T1). Fly nonstop on Sun PhuQuoc Airways flight 934 (Booking Ref 8I3U7X) departing 18:45, landing at Hanoi Noi Bai T1 at 20:05.',
+            mustDo: true,
+            resBadge: '✅ Ticketed (Ref 8I3U7X)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Airport+Domestic+Terminal+1'
+          },
+          {
+            id: 'd5-a4',
+            time: '08:45 PM – 09:30 PM',
+            title: 'Check In at Sheraton Hanoi Hotel (West Lake)',
+            detail: 'Take a 30-minute Grab/car from Noi Bai Airport across Nhật Tân Bridge directly to Sheraton Hanoi Hotel (K5 Nghi Tam, Tay Ho — Conf #73088468, Platinum Elite Deluxe King).',
+            mustDo: true,
+            resBadge: '✅ Confirmed (#73088468)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Leisurely Hoi An Lunch & Farewell Coffee',
+            spot: 'The DeckHouse An Bang Beach + Uncle Huan Coffee & Garden (71/26 Phan Châu Trinh)',
+            detail: 'Fresh seafood or wood-fired pizza by the waves at An Bàng Beach, followed by one last round of Uncle Huan\'s signature Egg Coffee & Salted Coffee with tree latte art in Old Town.',
+            resBadge: '🟢 Walk-In Friendly for Weekday Lunch',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+DeckHouse+An+Bang+Beach+Hoi+An',
+            link: 'https://hoianit.com/best-cafe-hoi-an/',
+            linkLabel: 'View Cafe Guide ↗'
+          },
+          {
+            meal: 'Late Arrival Bite (Hanoi ~21:30)',
+            spot: 'Sheraton Hanoi Platinum Lounge / Oven D\'Or or Room Service Phở',
+            detail: 'Since you reach the hotel around 21:30, keep dinner effortless at Sheraton Hanoi so Katie can head straight to sleep.',
+            resBadge: '🟢 In-Hotel Dining (No Booking Needed)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi',
+            link: 'https://www.marriott.com/',
+            linkLabel: 'Marriott Hotel Info ↗'
+          }
+        ],
+        hacks: [
+          'Noi Bai Airport (HAN) is ONLY 25–30 minutes from Sheraton Hanoi Hotel on West Lake (because Tay Ho sits on the northern side of Hanoi right across the Nhật Tân Bridge from the airport, saving you 25 minutes of city traffic compared to Old Quarter hotels!).',
+          'Before boarding your 18:45 flight in Da Nang, move 3 warm fleeces/jackets to the top of your carry-on—Hanoi at 20:05 in late December is typically 7°C–8°C cooler than Central Vietnam.'
+        ],
+        scams: [
+          'Hanoi Noi Bai Airport Taxi Impersonators: At HAN Terminal 1 arrivals, men holding lanyards will walk up asking "Grab? Taxi?" and lead you to an un-metered car charging 500,000–700,000 VND. Book via the official Grab app (~250,000–300,000 VND to Sheraton Hanoi) or use the official Mai Linh / G7 taxi queue.'
+        ]
+      },
+      {
+        day: 6,
+        date: 'Thu, Dec 24',
+        shortTitle: 'Food Tour & Christmas Eve Service',
+        title: 'Temple of Literature, Guided Old Quarter Food Walk & Evangelical Christmas Eve Service!',
+        region: 'hanoi',
+        regionLabel: 'Hanoi Culture',
+        hotel: 'Sheraton Hanoi Hotel (Conf #73088468)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi',
+        driveBadge: '15–20 min Grab rides • Guided Afternoon Walk',
+        weatherTip: 'Crisp 16°C–21°C • Festive Christmas Eve Candlelight Night',
+        activities: [
+          {
+            id: 'd6-a1',
+            time: '09:30 AM – 11:45 AM',
+            title: 'Temple of Literature (Văn Miếu — Vietnam\'s First University, 1070)',
+            detail: 'Explore the five peaceful courtyards, ancient banyan trees, Khue Van Cac pavilion, and the 82 stone turtle steles bearing the names of imperial doctoral scholars (70,000 VND/adult, Katie free).',
+            mustDo: true,
+            resBadge: '🟢 Walk-Up Gate Ticket (70k ₫ Adult / Katie FREE)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Temple+of+Literature+58+Quoc+Tu+Giam+Hanoi'
+          },
+          {
+            id: 'd6-a2',
+            time: '01:30 PM – 04:30 PM',
+            title: '★ Guided Tour #1: Private Old Quarter Walking Street Food & Egg Coffee Tour (4.8★)',
+            detail: 'Meet your private English-speaking foodie guide (Hanoi Street Food Tour, 78A Trần Nhật Duật) for an easy 3-hour family tasting walk through the 36 guild streets: sample Bún Chả, steamed Bánh Cuốn watched live, crispy pillow dumplings for Katie, and finish at historic 1946 Cafe Giảng (39 Nguyễn Hữu Huân) for whipped Egg Coffee & warm Egg Cocoa!',
+            mustDo: true,
+            resBadge: '🔴 Reserve 3–5 Days Ahead (Private Family Slot)',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hanoi+Street+Food+Tour+78A+Tran+Nhat+Duat+Hanoi',
+            ticketLabel: '🎟️ Book Cheapest Direct at HanoiStreetFoodTour.com ($25) ↗',
+            ticketUrl: 'https://www.hanoistreetfoodtour.com/'
+          },
+          {
+            id: 'd6-a3',
+            time: '05:30 PM – 08:30 PM',
+            title: '⛪ Evangelical Christmas Eve Candlelight Service at HIF (or Hanoi Evangelical Church)',
+            detail: 'Option A (English Worship + Kids Ministry): Head to Hanoi International Fellowship (HIF, Detech Tower, 8 Tôn Thất Thuyết, Cầu Giấy — 4.8★) for their English Christmas Eve Candlelight Service with carols and KidzQuest for Katie. Option B (Historic Old Quarter): Attend the 19:30 Christmas Eve service at Hanoi Evangelical Church (2 Ngõ Trạm, Hoàn Kiếm, founded 1916).',
+            mustDo: true,
+            resBadge: '🟢 Free Entry (Arrive 20–30 Mins Early for Seats)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hanoi+International+Fellowship+Detech+Building+8+Ton+That+Thuyet+Hanoi',
+            ticketLabel: '⛪ Check HIF Christmas Eve Service Times ↗',
+            ticketUrl: 'https://www.hif.vn/%F0%9F%8E%84-advent-christmas-services-at-hif-youre-invited/'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Midday Guided Tasting (6–7 Dishes Included)',
+            spot: 'Hanoi Street Food Tour + Cafe Giảng (39 Nguyễn Hữu Huân)',
+            detail: 'Your guided tour covers lunch and afternoon treats across 6–7 clean, family-vetted Old Quarter icons, culminating in original 1946 Egg Coffee ("Cà phê trứng") and caffeine-free Egg Hot Chocolate ("Cacao trứng") for Katie.',
+            resBadge: '🔴 Included in Pre-Booked Street Food Tour',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cafe+Giang+39+Nguyen+Huu+Huan+Hoan+Kiem+Hanoi',
+            link: 'https://www.hanoistreetfoodtour.com/',
+            linkLabel: 'Book Guided Food Tour ↗'
+          },
+          {
+            meal: 'Christmas Eve Dinner',
+            spot: 'Pizza 4P\'s Lotte Mall West Lake (or 43 Tràng Tiền)',
+            detail: 'Celebrate Christmas Eve with wood-fired Burrata Margherita pizza and crab pasta at Vietnam\'s most beloved family restaurant.',
+            resBadge: '🔴 Reserve 5–7 Days Ahead (Essential on Christmas Eve!)',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Lotte+Mall+West+Lake+Hanoi',
+            link: 'https://booking.pizza4ps.com/',
+            linkLabel: 'Reserve Table at booking.pizza4ps.com ↗'
+          }
+        ],
+        hacks: [
+          'Pizza 4P\'s Reservation Rule: Christmas Eve (Dec 24) is one of the busiest nights of the year at Pizza 4P\'s—book your table online at booking.pizza4ps.com a week in advance (choose Lotte Mall West Lake near Sheraton or 43 Tràng Tiền).',
+          'Why HIF Is Ideal on Dec 24 Night: While downtown streets around St. Joseph\'s Cathedral get gridlocked with scooter crowds by 20:00 on Christmas Eve, HIF\'s sanctuary in Cầu Giấy gives your family a joyful, spacious English Evangelical Candlelight Service with easy Grab drop-off and pickup.'
+        ],
+        scams: [
+          'Hoàn Kiếm Lake "Aggressive Shoe-Shine" & "Donut Ladies" Trap: Around Hoàn Kiếm Lake, men will point at your sneakers and start squirting glue or brushing your shoe without permission, then demand 300,000–500,000 VND (~₹1,500) for "repairs." Similarly, women with baskets of mini donuts will hand a bag to your child and demand 150,000 VND for 4 tiny donuts. Keep walking and say a firm "Không!"'
+        ]
+      },
+      {
+        day: 7,
+        date: 'Fri, Dec 25',
+        shortTitle: 'Christmas Day in Hanoi',
+        title: 'Christmas Day: Optional Morning Evangelical Service, Imperial Citadel & Festive Feast',
+        region: 'hanoi',
+        regionLabel: 'Hanoi Culture',
+        hotel: 'Sheraton Hanoi Hotel (Conf #73088468)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi',
+        driveBadge: '15-min Grab rides • Unhurried Holiday Pace',
+        weatherTip: 'Pleasant winter sunshine (17°C–22°C)',
+        activities: [
+          {
+            id: 'd7-a1',
+            time: '08:30 AM – 10:15 AM',
+            title: '⛪ Optional Christmas Morning Worship at Hanoi Evangelical Church (2 Ngõ Trạm)',
+            detail: 'If you chose Christmas Eve lights last night, celebrate Christmas Morning at Hanoi Evangelical Church (Nhà thờ Tin Lành Hà Nội, 2 Ngõ Trạm, Hoàn Kiếm — 4.7★, founded 1916), right in the Old Quarter! (If you already attended HIF\'s Candlelight Service on Dec 24 night, sleep in and enjoy a slow Christmas breakfast at Sheraton Hanoi).',
+            mustDo: false,
+            resBadge: '🟢 Free Entry (Arrive 20m Early)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Nha+tho+Tin+Lanh+Ha+Noi+2+Ngo+Tram+Hoan+Kiem+Hanoi'
+          },
+          {
+            id: 'd7-a2',
+            time: '10:30 AM – 12:30 PM',
+            title: 'UNESCO Imperial Citadel of Thăng Long (Hoàng Thành Thăng Long)',
+            detail: 'Vietnam\'s ancient royal seat for over 1,000 years (100,000 VND/adult, Katie free). Climb the massive Đoan Môn royal gate, see archaeological palace foundations, and walk down into the preserved D67 underground command bunker.',
+            mustDo: true,
+            resBadge: '🟢 Walk-Up Gate Ticket (100k ₫ Adult / Katie FREE)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Imperial+Citadel+of+Thang+Long+19C+Hoang+Dieu+Hanoi'
+          },
+          {
+            id: 'd7-a3',
+            time: '03:00 PM – 05:30 PM',
+            title: 'Hoàn Kiếm Lake, Ngọc Sơn Island Temple & Hàng Mã Holiday Toy Street',
+            detail: 'Cross the scarlet wooden Húc (Rising Sun) Bridge to Ngọc Sơn Temple on Jade Island (50,000 VND/adult at bridge booth), then stroll Hàng Mã and Hàng Gai streets decked out in festive holiday lanterns and crafts.',
+            mustDo: true,
+            resBadge: '🟢 Walk-Up Bridge Booth (50,000 ₫)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ngoc+Son+Temple+Hoan+Kiem+Lake+Hanoi'
+          },
+          {
+            id: 'd7-a4',
+            time: '06:30 PM – 08:30 PM',
+            title: 'Festive Christmas Day Family Dinner at Luk Lak in the French Quarter',
+            detail: 'Celebrate Christmas evening at Chef Madame Bình\'s refined Indochine heritage villa near the Hanoi Opera House with zero travel or packing stress.',
+            mustDo: true,
+            resBadge: '🔴 Reserve 3–5 Days Ahead (Christmas Dinner)',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Luk+Lak+Vietnamese+Restaurant+4A+Le+Thanh+Tong+Hanoi',
+            ticketLabel: '🍽️ Reserve Table at LukLak.vn ↗',
+            ticketUrl: 'https://luklak.vn/en/home/'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Christmas Day Lunch',
+            spot: 'Bún Chả Hương Liên (24 Lê Văn Hưu) or Madame Hiên (43 Cửa Bắc)',
+            detail: 'Enjoy classic Hanoi smoky grilled pork & vermicelli at the famous "Obama Bún Chả" spot (walk-in) or relaxed French-Vietnamese courtyard dining at Madame Hiên.',
+            resBadge: '🟢 Walk-In Friendly (Bún Chả Hương Liên)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Bun+Cha+Huong+Lien+24+Le+Van+Huu+Hanoi',
+            link: 'https://sg.trip.com/moments/theme/poi-cafe-ging-145048390-restaurant-993134/',
+            linkLabel: 'View Guide ↗'
+          },
+          {
+            meal: 'Christmas Day Dinner (Book Ahead!)',
+            spot: 'Luk Lak Vietnamese Restaurant (4A Lê Thánh Tông)',
+            detail: '3 minutes from the Opera House. Helmed by Chef Madame Bình (25 years at Sofitel Legend Metropole), serving elevated regional Vietnamese dishes in a gorgeous Indochine villa (~350,000–550,000 VND / ₹1,165–₹1,835 per person).',
+            resBadge: '🔴 Reserve 3–5 Days Ahead (Essential on Dec 25)',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Luk+Lak+Vietnamese+Restaurant+4A+Le+Thanh+Tong+Hanoi',
+            link: 'https://luklak.vn/en/home/',
+            linkLabel: 'Reserve at LukLak.vn ↗'
+          }
+        ],
+        hacks: [
+          'How to Cross the Street in Hanoi\'s Old Quarter like a Local: Never run, stop abruptly, or step backward. Wait for a small gap, hold Katie\'s hand on the inside away from oncoming scooters, raise your hand slightly at waist level, and walk across at a steady, predictable pace—motorbikes flow smoothly around you like water around a pebble.',
+          'Friday Evening Bonus: Starting at 19:00 tonight (Friday), the entire street loop around Hoàn Kiếm Lake closes to all motorbikes and cars for the weekend pedestrian walking festival!'
+        ],
+        scams: [
+          'Old Quarter "Silk" & "Lacquer" Mislabeling: Small tourist stalls on Hàng Gai often sell polyester blends labeled as "100% Mulberry Silk." Since you already visited Hoi An Silk Village, buy your silk in Hoi An or at verified boutiques like Tan My Design (61 Hàng Gai, Hanoi) which has fixed price tags.'
+        ]
+      },
+      {
+        day: 8,
+        date: 'Sat, Dec 26',
+        shortTitle: 'Ethnology Museum & Bat Trang Pottery',
+        title: 'Tribal Stilt Houses at Museum of Ethnology & Bát Tràng Ceramic Village',
+        region: 'hanoi',
+        regionLabel: 'Hanoi Culture',
+        hotel: 'Sheraton Hanoi Hotel (Conf #73088468)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi',
+        driveBadge: '15m to Museum • 25m to Bat Trang • Zero Highway Slogs',
+        weatherTip: 'Great outdoor day • Replaces the 4-hr Ninh Binh drive',
+        activities: [
+          {
+            id: 'd8-a1',
+            time: '09:00 AM – 12:00 PM',
+            title: 'Vietnam Museum of Ethnology (Bảo Tàng Dân Tộc Học)',
+            detail: 'Widely rated the #1 museum in Hanoi for families (40,000 VND/adult, 15,000 VND/child). The sprawling outdoor architectural garden features real, life-sized Bahnar communal houses (with a towering 19m roof!), Ede longhouses, and Tay stilt houses that Katie can climb inside.',
+            mustDo: true,
+            resBadge: '🟢 Walk-Up Gate Ticket (40k ₫ Adult / 15k ₫ Child)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Vietnam+Museum+of+Ethnology+Nguyen+Van+Huyen+Cau+Giay+Hanoi'
+          },
+          {
+            id: 'd8-a2',
+            time: '02:00 PM – 04:45 PM',
+            title: 'Bát Tràng Ancient Ceramic Village & Pottery Museum',
+            detail: '25 minutes across the Red River. A 700-year-old porcelain village where you can walk narrow brick kiln alleys, visit the futuristic spiral Bát Tràng Pottery Museum, and glaze/paint ceramic mugs (~50,000–100,000 VND workshop at the museum).',
+            mustDo: true,
+            resBadge: '🟢 Walk-In Friendly (Buy Ticket at Museum Desk)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Bat+Trang+Pottery+Museum+Gia+Lam+Hanoi'
+          },
+          {
+            id: 'd8-a3',
+            time: '06:00 PM – 08:30 PM',
+            title: 'Saturday Night Car-Free Walking Street around Hoàn Kiếm Lake',
+            detail: 'On Saturday night, the entire loop around Hoàn Kiếm Lake is 100% closed to vehicles! Local families play traditional tug-of-war, bamboo dancing, shuttlecock (đá cầu), and drive mini toy cars.',
+            mustDo: true,
+            resBadge: '🟢 Free Public Pedestrian Zone',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hoan+Kiem+Lake+Walking+Street+Hanoi'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Lunch (Social Enterprise Gem)',
+            spot: 'KOTO Van Mieu (59 Văn Miếu)',
+            detail: 'KOTO ("Know One, Teach One") is a wonderful hospitality training restaurant serving clean, delicious Vietnamese and Western family dishes right by the Temple of Literature.',
+            resBadge: '🟡 Book 1 Day Ahead (Or Walk In Early at 12:00)',
+            resType: 'rec',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=KOTO+Van+Mieu+59+Van+Mieu+Hanoi',
+            link: 'https://a21tours.com/attractions/temple-of-literature',
+            linkLabel: 'View Details ↗'
+          },
+          {
+            meal: 'Evening Treat',
+            spot: 'Kem Tràng Tiền (35 Tràng Tiền)',
+            detail: 'Walk to historic Kem Tràng Tiền (since 1958) for green-rice (Cốm) or coconut milk ice cream bars (15,000 VND / ₹50) while strolling the car-free lake.',
+            resBadge: '🟢 Walk-In Counter (No Booking Needed)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Kem+Trang+Tien+35+Trang+Tien+Hoan+Kiem+Hanoi',
+            link: 'https://www.vietnamtourism.com/en/vietnam-museum-of-ethnology-in-hanoi-tickets-opening-hours-and-what-not-to-miss',
+            linkLabel: 'View Guide ↗'
+          }
+        ],
+        hacks: [
+          'Why Saturday Is the Best Day for Museum of Ethnology + Hoàn Kiếm Lake: On weekends, the Museum of Ethnology frequently hosts outdoor folk games in the garden, AND Hoàn Kiếm Lake becomes a car-free pedestrian park where Katie can run freely without a single motorbike!',
+          'At Bát Tràng, go directly to the "Centre of Quintessence of Vietnamese Craft Villages" (the giant curved clay-pot-shaped museum building)—it is clean, well-organized, and has fixed-price artisan studios.'
+        ],
+        scams: [
+          'Bát Tràng "Fragile Shipping" Upsell: Roadside ceramic shops may offer to "ship a huge dinner set to India." Stick to small hand-painted bowls/cups wrapped in bubble wrap that fit in your carry-on or 30 kg IndiGo checked bag.'
+        ]
+      },
+      {
+        day: 9,
+        date: 'Sun, Dec 27',
+        shortTitle: 'Vintage Army Jeep Tour & Puppets',
+        title: '5.0★ Guided Vintage Army Jeep Tour, West Lake Pagoda & Water Puppet Theatre',
+        region: 'hanoi',
+        regionLabel: 'Hanoi Culture',
+        hotel: 'Sheraton Hanoi Hotel (Conf #73088468 — Last night of 5N stay)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi',
+        driveBadge: 'Hotel Pickup for Jeep Tour • 5 mins to Tran Quoc Pagoda',
+        weatherTip: 'Pack 1 small overnight bag tonight for tomorrow\'s Ha Long Bay cruise',
+        activities: [
+          {
+            id: 'd9-a1',
+            time: '08:30 AM – 12:30 PM',
+            title: '★ Guided Tour #2: Hanoi Backstreet Tours — Half-Day Vintage Open-Air Army Jeep Tour (5.0★)',
+            detail: 'Picked up right at Sheraton Hanoi in a classic open-air Soviet-era UAZ Army Jeep (5.0★ across 3,797 reviews)! All 3 of you ride safely together with an English-speaking guide through French Quarter backstreets, across Gustave Eiffel\'s 1902 Long Biên Bridge, down onto the green Red River Banana Island farms, and past Ngọc Hà B-52 Lake.',
+            mustDo: true,
+            resBadge: '🔴 Reserve 3–5 Days Ahead (Book Direct for Cheapest Rate)',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Long+Bien+Bridge+Hanoi',
+            ticketLabel: '🎟️ Book Cheapest Direct at HanoiBackstreetTours.com ($49) ↗',
+            ticketUrl: 'https://hanoibackstreettours.com/product-category/hanoi-jeep-tours/'
+          },
+          {
+            id: 'd9-a2',
+            time: '03:00 PM – 04:15 PM',
+            title: 'Trấn Quốc Pagoda (6th Century) on West Lake Causeway',
+            detail: 'Just 5 minutes down the lakeside road from Sheraton Hanoi. Visit Hanoi\'s oldest temple (built in 541 AD on a small islet in West Lake) and see its sacred Bodhi tree grown from a cutting of the original tree in Bodh Gaya, India!',
+            mustDo: true,
+            resBadge: '🟢 Walk-In Friendly (100% FREE Entry)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Tran+Quoc+Pagoda+Thanh+Nien+Tay+Ho+Hanoi'
+          },
+          {
+            id: 'd9-a3',
+            time: '05:00 PM – 06:15 PM',
+            title: 'Thăng Long Water Puppet Theatre (57B Đinh Tiên Hoàng)',
+            detail: 'Watch traditional northern Vietnamese folk legends performed by lacquered wooden puppets dancing across a waist-deep indoor water stage accompanied by a live bamboo orchestra (50 mins).',
+            mustDo: true,
+            resBadge: '🔴 Reserve 3–5 Days Ahead (Sells Out Daily in Dec!)',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Thang+Long+Water+Puppet+Theatre+57B+Dinh+Tien+Hoang+Hanoi',
+            ticketLabel: '🎟️ Buy Skip-the-Line QR Ticket on Klook ↗',
+            ticketUrl: 'https://www.klook.com/en-IN/activity/35653-thang-long-water-puppet-show-ticket-hanoi/'
+          },
+          {
+            id: 'd9-a4',
+            time: '08:30 PM – 09:00 PM',
+            title: 'Pack Overnight Duffel for Ha Long Bay (Leave Heavy Bags at Sheraton)',
+            detail: 'Put 1 change of clothes, warm windbreakers, toothbrushes, passports, and chargers into a small carry-on/duffel. Tomorrow morning at check-out, Sheraton Hanoi concierge will store your big suitcases until you return on Tuesday!',
+            mustDo: true,
+            resBadge: '✅ Free Concierge Storage at Sheraton',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Lunch (Near West Lake / Trúc Bạch Island)',
+            spot: 'Phở Cuốn Hương Mai (25 Ngũ Xã, Trúc Bạch Lake)',
+            detail: 'Just 5 minutes from Trấn Quốc Pagoda on quiet Trúc Bạch island—famous for Phở Cuốn (fresh uncut rice noodle sheets rolled around sautéed beef and herbs) and crispy fried phở pillows (Phở Chiên Phồng), which kids love!',
+            resBadge: '🟢 Walk-In Friendly (No Reservation Needed)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Pho+Cuon+Huong+Mai+25+Ngu+Xa+Ba+Dinh+Hanoi',
+            link: 'https://hanoisightseeingtours.com/best-hanoi-sightseeing-tours/hanoi-jeep-tour-vs-food-tour-which-experience-is-best/',
+            linkLabel: 'View Guide ↗'
+          },
+          {
+            meal: 'Dinner (Michelin Bib Gourmand Icon)',
+            spot: 'Chả Cá Thăng Long (6B Đường Thành, Hoàn Kiếm)',
+            detail: '2026 Michelin Bib Gourmand winner! Serves one legendary Hanoi specialty: boneless turmeric-marinated fish sizzled tableside in a pan with mountains of fresh green dill and spring onions (~170,000–220,000 VND / ₹565–₹735 per person).',
+            resBadge: '🟡 Book 1 Day Ahead via Concierge (Or Walk In by 18:15)',
+            resType: 'rec',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cha+Ca+Thang+Long+6B+Duong+Thanh+Hoan+Kiem+Hanoi',
+            link: 'https://guide.michelin.com/en/ha-noi/ha-noi_2974158/restaurant/cha-ca-thang-long',
+            linkLabel: 'Official Michelin Guide Review ↗'
+          }
+        ],
+        hacks: [
+          'Why You Must Book Thăng Long Water Puppet Theatre in Advance: All 5 daily shows sell out during Christmas/New Year week. Either pre-book your QR voucher on Klook 3–5 days ahead OR ask Sheraton Hanoi Concierge on Dec 23 when you check in to pick up 3 VIP Front-Row tickets (200,000 VND each) for Sunday Dec 27.',
+          'At Chả Cá Thăng Long, make sure you enter the Michelin-recognized **6B Đường Thành** building—there are copycat signs on the same street; look for the official red Michelin Bib Gourmand plaque at the entrance.'
+        ],
+        scams: [
+          'Trấn Quốc Pagoda Incense & Release-Bird Hawkers: Outside the entrance causeway of Trấn Quốc Pagoda, women will try to hand you incense sticks or small caged birds to "release for good karma" and then demand 200,000 VND. Entry to Trấn Quốc Pagoda is 100% FREE—politely decline anything handed to you outside the gate.'
+        ]
+      },
+      {
+        day: 10,
+        date: 'Mon, Dec 28',
+        shortTitle: 'Embark Calista Cruise (Ha Long)',
+        title: 'Expressway to Ha Long Bay & Embark Calista Luxury Overnight Cruise',
+        region: 'halong',
+        regionLabel: 'Ha Long Bay Cruise',
+        hotel: 'Calista Cruise - A Ha Long Bay Spectacle (Agoda #2065203981)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Tuan+Chau+International+Cruise+Port+Ha+Long+Bay',
+        driveBadge: '2.5-hr Modern Expressway Limousine Transfer',
+        weatherTip: '16°C–20°C on the bay • Breezy on sundeck after sunset',
+        activities: [
+          {
+            id: 'd10-a1',
+            time: '08:00 AM – 11:30 AM',
+            title: 'Check Out of Sheraton (Store Big Suitcases) & Transfer to Tuần Châu',
+            detail: 'Store your large suitcases with the Sheraton Hanoi bell desk (get baggage claim tags) and ride the express highway (2.5 hrs with 1 clean rest stop) to No. 37 Tuần Châu International Port.',
+            mustDo: true,
+            resBadge: '🔴 Confirm Limo Pickup with Host (+84938319979) by Dec 25',
+            resType: 'essential',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Tuan+Chau+International+Cruise+Port+Ha+Long+Bay'
+          },
+          {
+            id: 'd10-a2',
+            time: '12:15 PM – 03:00 PM',
+            title: 'Embark Calista Cruise & Welcome Lunch Sailing Through Limestone Karsts',
+            detail: 'Check into your luxury balcony cabin on Calista Cruise (launched 2025, 6-star fleet, Agoda Booking #2065203981, Host +84938319979) and enjoy lunch as the ship glides past towering emerald karst islands.',
+            mustDo: true,
+            resBadge: '✅ Confirmed (Agoda #2065203981 • All Sightseeing Included)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Tuan+Chau+International+Cruise+Port+Ha+Long+Bay',
+            ticketLabel: '⛵ Official Calista Cruise Website ↗',
+            ticketUrl: 'https://calistacruise.com/'
+          },
+          {
+            id: 'd10-a3',
+            time: '03:15 PM – 09:30 PM',
+            title: 'Luon Cave Kayaking/Bamboo Boat, Ti Top Island, Sunset Party & Squid Fishing',
+            detail: 'Paddle or ride a rowboat under the rock arch of Luon Cave into a sheltered lagoon (watch for wild monkeys on the cliffs!), enjoy the sundeck sunset party with fruit & spring roll cooking class, gourmet dinner, and night squid fishing.',
+            mustDo: true,
+            resBadge: '✅ Included in Your Calista Cruise Package',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Luon+Cave+Ha+Long+Bay'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Lunch & Dinner',
+            spot: 'Full-Board Fine Dining on Calista Cruise',
+            detail: 'All meals on board (1 lunch, 1 dinner, 1 breakfast, 1 brunch) are included in your cruise booking. Message the host (+84938319979) 48 hours ahead if you want any specific kid-friendly dishes prepared for Katie.',
+            resBadge: '✅ Included in Cruise Booking',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Tuan+Chau+International+Cruise+Port+Ha+Long+Bay',
+            link: 'https://calistacruise.com/',
+            linkLabel: 'Calista Cruise Info ↗'
+          }
+        ],
+        hacks: [
+          'Confirm Your Hanoi Limousine Transfer 48 Hours Before Dec 28: Message Calista Cruise host (+84938319979 via WhatsApp) on Dec 25/26 with your passport photos (required by Ha Long Port Authority for overnight registration) and confirm your exact morning pick-up time at Sheraton Hanoi.',
+          'For Luon Cave on Day 1 afternoon: Both kayaking AND bamboo boat rides are included in your Calista Cruise ticket! Choose the bamboo sampan rowed by a local villager if you want to stay 100% dry in cool December weather.'
+        ],
+        scams: [
+          'Ha Long Bay Cruise Onboard Drink & Corkage Gotcha: While all meals are included on luxury Ha Long Bay cruises, **all beverages (even bottled water at dinner, sodas, juice, and wine) are charged extra** at 2x–3x mainland prices plus 10–15% service tax, and bringing outside alcohol onto the dining deck can trigger a corkage fee. Pack a couple of water bottles and snacks for Katie inside your cabin bag, and always check the bar menu for "Happy Hour Buy-1-Get-1" on the sundeck at sunset!'
+        ]
+      },
+      {
+        day: 11,
+        date: 'Tue, Dec 29',
+        shortTitle: 'Surprise Cave & Return to Hanoi',
+        title: 'Sửng Sốt (Surprise) Cave, Return to Sheraton Hanoi & Farewell Evening',
+        region: 'halong',
+        regionLabel: 'Ha Long Bay → Hanoi',
+        hotel: 'Sheraton Hanoi Hotel (Conf #73089686 • 47,275 Bonvoy Pts)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi',
+        driveBadge: '2.5-hr Expressway Return (Back in Hanoi by 14:30)',
+        weatherTip: 'Wear comfortable walking shoes for ~100 steps inside Surprise Cave',
+        activities: [
+          {
+            id: 'd11-a1',
+            time: '06:30 AM – 09:00 AM',
+            title: 'Sunrise Tai Chi on Sundeck & Explore Sửng Sốt (Surprise) Cave',
+            detail: 'Start with morning tea/coffee and optional Tai Chi on the top deck, then take the tender boat to Bo Hòn Island to walk through the two colossal, dramatic chambers of Sửng Sốt Cave.',
+            mustDo: true,
+            resBadge: '✅ Cave Ticket Included in Cruise',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sung+Sot+Cave+Ha+Long+Bay'
+          },
+          {
+            id: 'd11-a2',
+            time: '09:30 AM – 02:30 PM',
+            title: 'Farewell Cruise Brunch, 11:00 AM Disembarkation & Return to Hanoi',
+            detail: 'Settle your onboard beverage bill at 09:30 AM, enjoy a full buffet brunch as the ship sails back to Tuần Châu Port, disembark at 11:00 AM, and ride the expressway back to Sheraton Hanoi by ~14:30.',
+            mustDo: true,
+            resBadge: '✅ Return Transfer arranged with Cruise',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Tuan+Chau+International+Cruise+Port+Ha+Long+Bay'
+          },
+          {
+            id: 'd11-a3',
+            time: '03:00 PM – 08:30 PM',
+            title: 'Re-Check In at Sheraton Hanoi (Conf #73089686) & West Lake Sunset',
+            detail: 'Collect your stored suitcases from the Sheraton bell desk, check into your Deluxe King room, and enjoy a completely relaxed final evening.',
+            mustDo: true,
+            resBadge: '✅ Confirmed (#73089686)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Morning & Midday',
+            spot: 'Light Breakfast & Full Farewell Brunch on Calista Cruise',
+            detail: 'Brunch is served around 09:30–10:30 AM on board, so you won\'t need a separate lunch until mid-afternoon.',
+            resBadge: '✅ Included in Cruise Booking',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Tuan+Chau+International+Cruise+Port+Ha+Long+Bay',
+            link: 'https://calistacruise.com/',
+            linkLabel: 'Cruise Info ↗'
+          },
+          {
+            meal: 'Farewell Dinner in Hanoi',
+            spot: 'Home Hanoi Restaurant (34 Châu Long, Trúc Bạch — 8 mins from Sheraton)',
+            detail: 'Home Hanoi sits in a gorgeous yellow 1930s French colonial villa just 8 minutes from Sheraton Hanoi, serving refined traditional northern dishes with live traditional string music.',
+            resBadge: '🟡 Book 1–2 Days Ahead (Ask Sheraton Concierge to Call)',
+            resType: 'rec',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Home+Hanoi+Restaurant+34+Chau+Long+Ba+Dinh+Hanoi',
+            link: 'https://www.rustycompass.com/vietnam-travel-guide-233/hanoi-5/eating-16/west-lake-a-guide-to-eating-in-hanois-expat-enclave-1446',
+            linkLabel: 'West Lake Dining Guide ↗'
+          }
+        ],
+        hacks: [
+          'Check Your Onboard Cruise Bill Item-by-Item at 09:15 AM: Cruise reception desks get crowded right at 10:30 AM before disembarkation. Settle your bill early before brunch and verify that only the drinks your cabin ordered are listed.',
+          'Wait to Buy Coffee Beans & Macadamia Nuts Until Tomorrow Morning in Hanoi: Highway rest stops between Ha Long Bay and Hanoi sell vacuum-packed coffee and dried fruit at 2x city prices.'
+        ],
+        scams: [
+          'Floating Pearl Farm / Highway Rest Stop Markup: The expressway rest stop between Ha Long and Hanoi is clean and great for restrooms, but its pearl jewelry and souvenir counters are heavily marked up for tour buses.'
+        ]
+      },
+      {
+        day: 12,
+        date: 'Wed, Dec 30',
+        shortTitle: 'Old Quarter & Nonstop Home',
+        title: '87 Mã Mây Heritage House, Coffee Souvenirs & Nonstop IndiGo Flight Home',
+        region: 'hanoi',
+        regionLabel: 'Hanoi → Mumbai',
+        hotel: 'Departure Day • IndiGo 6E 1638 (19:05 HAN → 23:05 BOM)',
+        hotelMapUrl: 'https://www.google.com/maps/search/?api=1&query=Noi+Bai+International+Airport+Terminal+2+Hanoi',
+        driveBadge: '30-min transfer from Sheraton to Noi Bai T2 at 16:15',
+        weatherTip: 'Request 15:00 or 16:00 Platinum Elite Late Check-Out at Sheraton!',
+        activities: [
+          {
+            id: 'd12-a1',
+            time: '09:30 AM – 12:00 PM',
+            title: '87 Mã Mây Ancient Merchant House & Maison Marou Chocolate / Coffee Run',
+            detail: 'Visit the beautifully preserved 19th-century traditional tube-house at 87 Mã Mây (20,000 VND at gate), and pick up Vietnamese phin filter coffee, lotus tea, and Marou artisanal chocolate bars (91A Thợ Nhuộm).',
+            mustDo: true,
+            resBadge: '🟢 Walk-In Friendly (20,000 ₫ Gate Ticket)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ancient+House+87+Ma+May+Hoan+Kiem+Hanoi'
+          },
+          {
+            id: 'd12-a2',
+            time: '01:00 PM – 04:00 PM',
+            title: 'Leisurely Lunch & Pack Up at Sheraton Hanoi (Use Platinum Late Checkout)',
+            detail: 'Use your Marriott Bonvoy Platinum Elite benefit to request a 15:00 or 16:00 late checkout so you can pack your 30 kg suitcases calmly.',
+            mustDo: true,
+            resBadge: '🟡 Request 4 PM Late Checkout at Front Desk on Dec 29',
+            resType: 'rec',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi'
+          },
+          {
+            id: 'd12-a3',
+            time: '04:15 PM – 11:05 PM',
+            title: 'Airport Transfer to Noi Bai T2 & Fly Nonstop IndiGo 6E 1638 (19:05 → 23:05 BOM)',
+            detail: 'Depart Sheraton at 16:15 (30 mins to HAN Terminal 2). Check in at Counters J1–J4 for IndiGo 6E 1638 (PNR YERR7Q, Flexi Plus Seats 11D, 11E, 11F, 30 kg checked bag per person). Land in Mumbai at 23:05 nonstop!',
+            mustDo: true,
+            resBadge: '✅ Ticketed (PNR YERR7Q • Seats 11D–11F)',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Noi+Bai+International+Airport+Terminal+2+Hanoi'
+          }
+        ],
+        dining: [
+          {
+            meal: 'Final Hanoi Lunch',
+            spot: 'Phở Thìn Bờ Hồ (61 Đinh Tiên Hoàng) or Oven D\'Or at Sheraton Hanoi',
+            detail: 'Savor one last bowl of clear, fragrant northern beef or chicken Phở and a salted or coconut coffee before heading to the airport.',
+            resBadge: '🟢 Walk-In Friendly',
+            resType: 'walkin',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=Pho+Thin+Bo+Ho+61+Dinh+Tien+Hoang+Hanoi',
+            link: 'https://www.goindigo.in/',
+            linkLabel: 'IndiGo Flight Info ↗'
+          }
+        ],
+        hacks: [
+          'Use Your Marriott Bonvoy Platinum Elite 4:00 PM Late Check-Out Perk: Because Sheraton Hanoi is a city conference/business hotel rather than a resort, Platinum Elite members are entitled to up to 4:00 PM late check-out (subject to availability)—ask at the front desk when you re-check in on Dec 29 so your room stays yours right until your 16:15 airport ride!',
+          'Spend Remaining VND Cash Before Security at HAN T2: Once you pass immigration at Noi Bai Terminal 2, all duty-free and café prices are listed in US Dollars ($). Spend your leftover small VND bills on snacks/coffee in the city or check-in hall.'
+        ],
+        scams: [
+          'Power Banks & Lithium Batteries in Checked Bags at Noi Bai Airport: Vietnam aviation security X-rays all checked suitcases after check-in and will page you over the loudspeaker to return to the security room if a power bank, spare camera battery, or e-cigarette is inside your 30 kg checked bag. Keep all power banks strictly in your hand luggage!'
+        ]
+      }
+    ];
+
+    // Family Dining Directory Dataset (With Google Maps Links & Advance Reservation Badges!)
+    var DINING_SPOTS = [
+      {
+        id: 'din-1',
+        name: 'Uncle Huan Coffee (3 Hoi An Branches)',
+        city: 'Hoi An',
+        tag: 'Cafe & Treat',
+        resBadge: '🟢 Walk-In Friendly (No Reservation Needed)',
+        resType: 'walkin',
+        address: '675 Hai Bà Trưng (Flagship) • 61 Lê Lợi (Old Town) • 71/26 Phan Châu Trinh (Garden)',
+        priceRange: '45,000–85,000 ₫ (~₹150–₹285) / drink',
+        whatToOrder: 'Signature Egg Coffee (Cà phê trứng), Salted Coffee (Cà phê muối), and Iced Coconut Coffee—all served with hand-etched Hoi An tree latte art!',
+        katiePick: 'Iced Coconut Smoothie or Hot Chocolate with custom hand-drawn latte art on top + pastries.',
+        proTip: '4.9★ across 4,222+ Google reviews! Visit 675 Hai Bà Trưng or 61 Lê Lợi right after your tailoring session on Day 2, and relax in the lush courtyard at 71/26 Phan Châu Trinh on Day 5 before your airport transfer.',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Uncle+Huan+Coffee+675+Hai+Ba+Trung+Hoi+An',
+        url: 'https://vietnamtour247.com/uncle-huan-coffee-hoi-an/',
+        urlLabel: 'Verified Menu & Guide ↗'
+      },
+      {
+        id: 'din-2',
+        name: 'Morning Glory Signature',
+        city: 'Hoi An',
+        tag: 'Must-Try Local',
+        resBadge: '🔴 Reserve 2–3 Days Ahead (For Riverside Balcony)',
+        resType: 'essential',
+        address: '41 Nguyễn Phúc Chu, An Hội Islet (3-min walk from Laluna)',
+        priceRange: '150,000–300,000 ₫ (~₹500–₹1,000) / dish',
+        whatToOrder: 'White Rose shrimp dumplings, Cao Lầu noodles, Crispy Hoi An Pancakes (Bánh Xèo), Stuffed Calamari.',
+        katiePick: 'White Rose dumplings (mild, delicate steamed rice wrappers) & chicken fried rice.',
+        proTip: 'Lunch is walk-in friendly, but 2nd-floor riverfront balcony tables for dinner fill up fast—book online via Taste Vietnam (+84 235 224 1555) 2–3 days ahead!',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Morning+Glory+Signature+41+Nguyen+Phuc+Chu+Hoi+An',
+        url: 'https://beta.tastevietnam.asia/',
+        urlLabel: 'Reserve at TasteVietnam.asia ↗'
+      },
+      {
+        id: 'din-3',
+        name: 'Mango Mango Restaurant',
+        city: 'Hoi An',
+        tag: 'Festive / Upscale',
+        resBadge: '🔴 Reserve 2–3 Days Ahead (Essential for Dec 22 Festival)',
+        resType: 'essential',
+        address: '45 Nguyễn Phúc Chu, An Hội Islet (Right by Japanese Bridge)',
+        priceRange: '220,000–400,000 ₫ (~₹735–₹1,335) / dish',
+        whatToOrder: 'Crispy duck with mango sauce, tiger prawns in coconut, mango sticky rice.',
+        katiePick: 'Mango smoothies & crispy chicken skewers.',
+        proTip: 'Book an upstairs balcony table online at mangomangohoian.com/bookings 2–3 days ahead for Tuesday, Dec 22 (Full Moon Lantern Festival night) for front-row views above the river crowds.',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Mango+Mango+45+Nguyen+Phuc+Chu+Hoi+An',
+        url: 'https://www.mangomangohoian.com/bookings',
+        urlLabel: 'Book Table Online ↗'
+      },
+      {
+        id: 'din-4',
+        name: 'Cargo Club Cafe & Patisserie',
+        city: 'Hoi An',
+        tag: 'Kid-Friendly',
+        resBadge: '🟢 Walk-In Friendly (No Reservation Needed)',
+        resType: 'walkin',
+        address: '107–109 Nguyễn Thái Học, Old Town (4-min walk from Laluna)',
+        priceRange: '120,000–240,000 ₫ (~₹400–₹800) / dish',
+        whatToOrder: 'Vietnamese duck curry, Wonton soup, passionfruit meringue tart, and artisan pastries.',
+        katiePick: 'Homemade gelato, wood-fired pizzas/pastas, and chocolate lava cake.',
+        proTip: 'Large two-story riverfront dining room—easy walk-in for Day 1 arrival dinner or an afternoon cake break.',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cargo+Club+Cafe+and+Restaurant+107+Nguyen+Thai+Hoc+Hoi+An',
+        url: 'https://www.vietnamtourism.com/en/morning-glory-restaurant-in-hoi-an-what-to-order-prices',
+        urlLabel: 'Restaurant Guide ↗'
+      },
+      {
+        id: 'din-5',
+        name: 'Madam Khanh – The Banh Mi Queen',
+        city: 'Hoi An',
+        tag: 'Must-Try Local',
+        resBadge: '🟢 Walk-In Friendly (Fast Counter + Back Tables)',
+        resType: 'walkin',
+        address: '115 Trần Cao Vân, Hoi An (Right around the corner from Uncle Huan!)',
+        priceRange: '30,000–40,000 ₫ (~₹100–₹135) / sandwich',
+        whatToOrder: 'Mixed Banh Mi (char siu pork, pate, pickled papaya, herbs) or Chicken/Vegetarian Banh Mi.',
+        katiePick: 'Egg & Cheese Banh Mi ("Không cay" — no chili sauce!).',
+        proTip: 'Pair Madam Khanh for lunch on Day 2 with Uncle Huan Coffee (675 Hai Bà Trưng is just a 3-minute stroll away!).',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Madam+Khanh+The+Banh+Mi+Queen+115+Tran+Cao+Van+Hoi+An',
+        url: 'https://www.trip.com/moments/theme/poi-uncle-huan-coffee-152859648-restaurant-993134/',
+        urlLabel: 'View Reviews ↗'
+      },
+      {
+        id: 'din-6',
+        name: 'Reaching Out Tea House',
+        city: 'Hoi An',
+        tag: 'Cafe & Treat',
+        resBadge: '🟢 Walk-In Friendly (No Reservation Needed)',
+        resType: 'walkin',
+        address: '131 Trần Phú, Hoi An Old Town',
+        priceRange: '80,000–160,000 ₫ (~₹265–₹535) / tasting set',
+        whatToOrder: 'Three-tea oolong tasting flight or single-origin Vietnamese drip coffee with ginger/mung-bean cookies.',
+        katiePick: 'Homemade coconut & chocolate cookies + fresh passionfruit juice.',
+        proTip: 'Staffed by hearing-impaired artisans; you communicate via small wooden call-blocks in a serene antique courtyard.',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Reaching+Out+Teahouse+131+Tran+Phu+Hoi+An',
+        url: 'https://hoianit.com/best-cafe-hoi-an/',
+        urlLabel: 'View Cafe Guide ↗'
+      },
+      {
+        id: 'din-7',
+        name: 'Pizza 4P\'s (Tràng Tiền / Lotte West Lake)',
+        city: 'Hanoi',
+        tag: 'Kid-Friendly',
+        resBadge: '🔴 Reserve 4–7 Days Ahead (Essential!)',
+        resType: 'essential',
+        address: '43 Tràng Tiền (near Opera House) OR Lotte Mall West Lake (near Sheraton)',
+        priceRange: '300,000–450,000 ₫ (~₹1,000–₹1,500) / person',
+        whatToOrder: 'Half-and-Half Burrata Parma Ham / 4-Cheese Pizza with local honey, Crab Tomato Cream Spaghetti.',
+        katiePick: 'Watch the chefs stretch pizza dough at the counter + house-made Burrata Margherita & pudding.',
+        proTip: 'Walk-ins face 60–90 min waits at dinner! Book online at booking.pizza4ps.com 4–7 days ahead (note: Bảo Khánh branch is closed; choose Tràng Tiền or Lotte West Lake).',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+43+Trang+Tien+Hoan+Kiem+Hanoi',
+        url: 'https://booking.pizza4ps.com/',
+        urlLabel: 'Reserve at booking.pizza4ps.com ↗'
+      },
+      {
+        id: 'din-8',
+        name: 'Luk Lak Vietnamese Restaurant',
+        city: 'Hanoi',
+        tag: 'Festive / Upscale',
+        resBadge: '🔴 Reserve 3–5 Days Ahead (For Christmas Dinner)',
+        resType: 'essential',
+        address: '4A Lê Thánh Tông, Hoàn Kiếm (3 mins from Hanoi Opera House)',
+        priceRange: '350,000–550,000 ₫ (~₹1,165–₹1,835) / person',
+        whatToOrder: 'Sapa grilled pork with wild mac khen pepper, crispy pomelo salad, caramelized claypot fish.',
+        katiePick: 'Crispy golden prawn rolls, lotus-seed fried rice, and coconut ice cream.',
+        proTip: 'Chef Madame Bình spent 25 years at the historic Sofitel Legend Metropole—reserve online for your Christmas Day dinner on Dec 25!',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Luk+Lak+Vietnamese+Restaurant+4A+Le+Thanh+Tong+Hanoi',
+        url: 'https://luklak.vn/en/home/',
+        urlLabel: 'Reserve at LukLak.vn ↗'
+      },
+      {
+        id: 'din-9',
+        name: 'Chả Cá Thăng Long (6B Đường Thành)',
+        city: 'Hanoi',
+        tag: 'Must-Try Local',
+        resBadge: '🟡 Book 1 Day Ahead (Or Walk In Before 18:30)',
+        resType: 'rec',
+        address: '6B Đường Thành, Hoàn Kiếm, Hanoi',
+        priceRange: '170,000–220,000 ₫ (~₹565–₹735) / person',
+        whatToOrder: 'Their one signature dish: Chả Cá (boneless turmeric fish sizzled tableside with fresh dill, scallions, peanuts & vermicelli).',
+        katiePick: 'Boneless, mild, buttery pan-fried fish chunks with crispy rice crackers (zero spice unless added separately).',
+        proTip: '2026 Michelin Bib Gourmand winner! Make sure you enter #6B Đường Thành (look for the red Michelin plaque); ignore copycat shops next door.',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cha+Ca+Thang+Long+6B+Duong+Thanh+Hoan+Kiem+Hanoi',
+        url: 'https://guide.michelin.com/en/ha-noi/ha-noi_2974158/restaurant/cha-ca-thang-long',
+        urlLabel: 'Michelin Bib Gourmand Page ↗'
+      },
+      {
+        id: 'din-10',
+        name: 'Cafe Giảng (Original 1946 Egg Coffee)',
+        city: 'Hanoi',
+        tag: 'Cafe & Treat',
+        resBadge: '🟢 Walk-In Friendly (Plenty of Upstairs Seating)',
+        resType: 'walkin',
+        address: '39 Nguyễn Hữu Huân, Hoàn Kiếm, Hanoi',
+        priceRange: '35,000–45,000 ₫ (~₹115–₹150) / cup',
+        whatToOrder: 'Hot Egg Coffee (Cà phê trứng) — thick, warm tiramisu-like meringue foam over bold Vietnamese coffee.',
+        katiePick: 'Cacao Trứng (Warm Egg Hot Chocolate — caffeine-free and tastes like liquid custard!).',
+        proTip: 'Included as the grand finale stop of your Dec 24 Private Old Quarter Street Food Walking Tour! Walk down the narrow tile corridor to the upstairs courtyard.',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cafe+Giang+39+Nguyen+Huu+Huan+Hoan+Kiem+Hanoi',
+        url: 'https://sg.trip.com/moments/theme/poi-cafe-ging-145048390-restaurant-993134/',
+        urlLabel: 'View Cafe Guide ↗'
+      },
+      {
+        id: 'din-11',
+        name: 'Phở Cuốn Hương Mai (Trúc Bạch Island)',
+        city: 'Hanoi',
+        tag: 'Kid-Friendly',
+        resBadge: '🟢 Walk-In Friendly (No Reservation Needed)',
+        resType: 'walkin',
+        address: '25 Ngũ Xã, Ba Đình (5 mins from Trấn Quốc Pagoda & Sheraton)',
+        priceRange: '80,000–130,000 ₫ (~₹265–₹435) / person',
+        whatToOrder: 'Phở Cuốn (fresh rice noodle rolls with beef & herbs) and Phở Chiên Phồng (puffed golden crispy phở squares with gravy).',
+        katiePick: 'Phở Chiên Phồng — crispy puffed rice-noodle pillows that taste like savoury French fries!',
+        proTip: 'Situated on quiet Trúc Bạch lake peninsula right near Sheraton Hanoi—ideal after your Sunday Dec 27 morning Vintage Jeep Tour.',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Pho+Cuon+Huong+Mai+25+Ngu+Xa+Ba+Dinh+Hanoi',
+        url: 'https://www.rustycompass.com/vietnam-travel-guide-233/hanoi-5/eating-16/west-lake-a-guide-to-eating-in-hanois-expat-enclave-1446',
+        urlLabel: 'West Lake Food Guide ↗'
+      },
+      {
+        id: 'din-12',
+        name: 'KOTO Van Mieu (Temple of Literature)',
+        city: 'Hanoi',
+        tag: 'Kid-Friendly',
+        resBadge: '🟡 Book 1 Day Ahead (Or Walk In Early)',
+        resType: 'rec',
+        address: '59 Văn Miếu, Đống Đa (Right across from Temple of Literature)',
+        priceRange: '180,000–300,000 ₫ (~₹600–₹1,000) / person',
+        whatToOrder: 'Hanoi spring roll platter, caramelized chicken, and fresh fruit smoothies.',
+        katiePick: 'Dedicated kids\' menu with mini burgers, pasta, or mild chicken rice.',
+        proTip: 'Non-profit hospitality training restaurant ("Know One, Teach One") with spotless Western-standard hygiene and rooftop courtyard.',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=KOTO+Van+Mieu+59+Van+Mieu+Hanoi',
+        url: 'https://a21tours.com/attractions/temple-of-literature',
+        urlLabel: 'View Guide ↗'
+      }
+    ];
+
+    // Scams & Gotchas Dataset
+    var SCAM_CARDS = [
+      {
+        region: 'All Vietnam',
+        severity: 'High Priority',
+        title: '500,000 VND vs. 20,000 VND Blue Note Switch',
+        trap: 'Both bills are blue polymer. In dim lighting, tourists hand over 500k (₹1,667) instead of 20k (₹67), or a vendor quickly drops your 500k note and holds up a 20k note claiming you underpaid.',
+        fix: 'Keep 500k bills in a separate zippered pocket from your daily spending stack (20k/50k/100k). Announce the denomination out loud when handing cash to drivers.'
+      },
+      {
+        region: 'All Vietnam',
+        severity: 'High Priority',
+        title: 'Fake "Grab" Screenshot & Lanyard Touts at Airports',
+        trap: 'At Da Nang (DAD) and Hanoi (HAN) arrival curbs, men wearing green jackets or holding fake Grab cards offer to take you "for Grab price," then lock the doors and demand 2x–3x the fare plus fake "airport toll fees."',
+        fix: 'Only book inside the official Grab app (verify the exact 5-digit license plate before putting bags in the trunk) or use your pre-booked hotel car.'
+      },
+      {
+        region: 'Hoi An',
+        severity: 'Medium Priority',
+        title: 'Hoai River Lantern Boat Touts (300k–500k VND Quotes)',
+        trap: 'Freelance touts along the riverfront wave laminated menus claiming lantern boats cost 350,000–500,000 VND for a family.',
+        fix: 'Walk straight to the official uniformed ticket booth on Bạch Đằng / Nguyễn Phúc Chu street: the official cooperative rate is strictly 170,000 VND total for 1–3 passengers (~₹567) for 20 minutes.'
+      },
+      {
+        region: 'Hoi An',
+        severity: 'Medium Priority',
+        title: 'Old Town "Free Shoulder-Pole Fruit Basket Photo" Trap',
+        trap: 'Vendors in conical hats place their bamboo fruit pole on your or Katie\'s shoulder and insist you take a photo, then demand 150,000–200,000 VND for a small bag of fruit.',
+        fix: 'Keep hands at your sides, smile warmly, and say "Không, cảm ơn" (No, thank you) before they lift the bamboo pole.'
+      },
+      {
+        region: 'Hoi An',
+        severity: 'Medium Priority',
+        title: 'Cam Thanh Coconut Village Roadside Scooter Interceptors',
+        trap: '1 km before Cam Thanh Coconut Village, men on scooters wave down taxis pretending to be official village guides and direct cars into overpriced commission yards charging 300,000+ VND/person.',
+        fix: 'Pre-book your Klook voucher (~85,000–90,000 VND) and tell your driver to go strictly to verified entrances like Hacoconut or Lang Dua Xanh.'
+      },
+      {
+        region: 'Hoi An',
+        severity: 'Low Priority',
+        title: 'Copycat Tailor Touts & Polyester "Silk" Linings',
+        trap: 'Street touts try to steer you into knockoff shops ("BeBe 2"), or budget tailors line wool suits with non-breathable plastic polyester that feels stifling in Indian weather.',
+        fix: 'Walk directly to the verified addresses of BeBe Tailor (05–07 Hoàng Diệu) or A Dong Silk (40 Lê Lợi / 62 Trần Hưng Đạo) and request breathable Bemberg/viscose lining.'
+      },
+      {
+        region: 'Hanoi',
+        severity: 'High Priority',
+        title: 'Hoàn Kiếm Lake "Shoe-Shine Glue" & "Mini Donut" Ambush',
+        trap: 'Men around Hoàn Kiếm Lake point at your sneakers and squirt glue on your sole before you can react, demanding 400,000 VND. Donut hawkers press bags into kids\' hands and demand 150,000 VND.',
+        fix: 'Never stop walking if someone points at your shoes around Hoàn Kiếm Lake, and instruct Katie to only accept snacks handed by Mom or Dad.'
+      },
+      {
+        region: 'Hanoi',
+        severity: 'Medium Priority',
+        title: 'Copycat Restaurants on Famous Food Streets (Chả Cá & Bún Chả)',
+        trap: 'Next door to Michelin-listed Chả Cá Thăng Long (6B Đường Thành), lookalike storefronts use nearly identical yellow signs and waiters stand in the street waving you into the wrong door.',
+        fix: 'Check the exact street number (#6B Đường Thành) and look for the red Michelin Bib Gourmand plaque by the door before sitting down.'
+      },
+      {
+        region: 'Hanoi',
+        severity: 'Low Priority',
+        title: 'Trấn Quốc Pagoda "Karma Bird Release" & Incense Hustle',
+        trap: 'Outside the West Lake causeway to Trấn Quốc Pagoda, vendors push bundles of incense or tiny caged finches into visitors\' hands and demand 200,000 VND.',
+        fix: 'Entry to Trấn Quốc Pagoda is 100% free. Keep hands folded and walk past the outer causeway hawkers.'
+      },
+      {
+        region: 'Ha Long Bay',
+        severity: 'Medium Priority',
+        title: 'Cruise Onboard Beverage Markup & Disembarkation Bill Errors',
+        trap: 'On all Ha Long Bay luxury cruises, meals are included but water/soda/wine at dinner cost 2x–3x mainland prices plus 15% tax, and rushed 10:30 AM checkouts sometimes include another cabin\'s bar tab.',
+        fix: 'Pack 2–3 water bottles in your overnight duffel for your cabin, use the sundeck 2-for-1 Happy Hour, and review your itemized bill calmly at 09:15 AM before brunch.'
+      },
+      {
+        region: 'All Vietnam',
+        severity: 'Low Priority',
+        title: 'Restaurant Wet Towels & Table Peanuts (Charged Per Item)',
+        trap: 'Many local restaurants place cold wet wipes and boiled peanuts on the table automatically; they add 3,000–10,000 VND per towel/plate to the bill if opened.',
+        fix: 'It\'s only ₹10–₹30, so no stress—just leave them unopened if you prefer using your own sanitizer wipes.'
+      },
+      {
+        region: 'Hanoi',
+        severity: 'High Priority',
+        title: 'Noi Bai Airport Checked-Bag Power Bank Confiscation',
+        trap: 'Vietnam airport security screens all checked bags immediately after check-in; if a power bank or spare lithium battery is inside your suitcase, you will be paged back to the security room to unpack.',
+        fix: 'Before leaving Sheraton Hanoi at 16:15 on Dec 30, do a 30-second family check that every power bank and camera battery is in your cabin backpacks.'
+      }
+    ];
+
+    // Skip vs Keep Matrix Data
+    var SKIP_MATRIX = [
+      {
+        place: 'Uncle Huan Coffee + UNESCO Hoi An Ancient Town, Lantern Boat & Craft Villages',
+        drive: '5–15 mins from Laluna',
+        verdict: 'MUST-DO (Kept)',
+        badgeClass: 'bg-emerald-100 text-emerald-900',
+        reason: 'Authentic living heritage, signature Tree Latte Art on Salted & Egg Coffee right in Old Town, silk/pottery hands-on fun for Katie, and the Dec 22 Full Moon Lantern Festival.'
+      },
+      {
+        place: 'Da Nang Sightseeing Detours (Marble Mountains & Dragon Bridge)',
+        drive: '60–75 mins round-trip from Hoi An',
+        verdict: 'SKIPPED (100% Hoi An Focus)',
+        badgeClass: 'bg-rose-100 text-rose-900',
+        reason: 'Removed per your preference so you spend 100% of Dec 19–23 immersed in Hoi An\'s riverside charm without commuting back and forth to Da Nang until your Dec 23 evening flight.'
+      },
+      {
+        place: 'Hanoi Guided Vintage Army Jeep Tour (5.0★) & Private Street Food Walk (4.8★)',
+        drive: 'Pickup at Sheraton / Walk in Old Quarter',
+        verdict: 'MUST-DO (Added)',
+        badgeClass: 'bg-emerald-100 text-emerald-900',
+        reason: 'Zero-stress way for Jerome, Sandra & Katie to explore Long Biên Bridge, Red River Banana Island, and 6–7 clean Old Quarter street foods + Cafe Giảng Egg Coffee.'
+      },
+      {
+        place: 'Evangelical Christmas Service (HIF Candlelight or 1916 Hanoi Evangelical Church)',
+        drive: '15–20 mins from Sheraton Hanoi',
+        verdict: 'MUST-DO (Added)',
+        badgeClass: 'bg-emerald-100 text-emerald-900',
+        reason: 'Meaningful family Christmas worship on Dec 24 night (English Candlelight + KidzQuest at HIF) or Dec 25 morning (historic 1916 Old Quarter sanctuary at 2 Ngõ Trạm).'
+      },
+      {
+        place: 'Sun World Ba Na Hills & Golden Bridge (Da Nang)',
+        drive: '1h 30m each way (3 hrs RT)',
+        verdict: 'SKIPPED (Tourist Trap)',
+        badgeClass: 'bg-rose-100 text-rose-900',
+        reason: 'Expensive commercial theme park (~950,000 VND/pax), long cable-car queues, and frequently socked in by thick winter fog/rain in late December.'
+      },
+      {
+        place: 'Mỹ Sơn Sanctuary (Champa Hindu Ruins)',
+        drive: '1h 15m each way (2.5 hrs RT)',
+        verdict: 'SKIPPED (Per Family Rule)',
+        badgeClass: 'bg-rose-100 text-rose-900',
+        reason: 'Over an hour\'s drive each way and excluded per your family preference to skip Hindu temple ruins.'
+      },
+      {
+        place: 'Ninh Bình Day Trip from Hanoi (Tràng An / Tam Cốc)',
+        drive: '2h+ each way (4–5 hrs highway RT)',
+        verdict: 'SKIPPED (Redundant + Long Drive)',
+        badgeClass: 'bg-rose-100 text-rose-900',
+        reason: 'Since you are already doing the luxury overnight Calista Cruise in Ha Long Bay on Dec 28–29 (identical limestone karst scenery), skipping the 4.5-hour highway day trip saves Katie from car fatigue.'
+      },
+      {
+        place: 'Hanoi Train Street Inside-Track Cafes',
+        drive: '15 mins from Sheraton',
+        verdict: 'CAUTION (Barricaded)',
+        badgeClass: 'bg-amber-100 text-amber-900',
+        reason: 'Police barriers frequently block Phùng Hưng / Trần Phú track access for safety, and café touts hustle tourists at the barricades. Skip the trackside squeeze with an 8-year-old.'
+      }
+    ];
+
+    // Confirmed Bookings Vault Data (With Google Maps Links)
+    var VAULT_BOOKINGS = [
+      {
+        category: 'Outbound International Flights',
+        title: 'Thai Airways (TG 352 / TG 594)',
+        date: 'Sat, Dec 19, 2026',
+        route: 'BOM (02:40) → BKK (08:25) | BKK (16:15) → DAD (18:00)',
+        refLabel: 'PNR: E3ESML',
+        refValue: 'E3ESML',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Airport+Terminal+2',
+        notes: 'Confirmed Economy (K) • 23 kg checked bag + 7 kg cabin bag per person • Terminal 2 at Mumbai & Da Nang.'
+      },
+      {
+        category: 'Central Vietnam Stay (4 Nights — 100% Hoi An)',
+        title: 'Laluna Hoi An Riverside Hotel & Spa',
+        date: 'Sat, Dec 19 – Wed, Dec 23, 2026',
+        route: '12 Nguyễn Du Street, Minh An, Hoi An (350m to Japanese Bridge)',
+        refLabel: 'Conf: QSW792921',
+        refValue: 'QSW792921',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Laluna+Hoi+An+Riverside+Hotel+and+Spa+12+Nguyen+Du+Hoi+An',
+        notes: 'Super Deluxe Double Room with Balcony & River View • 4-minute walk to Uncle Huan Coffee & Old Town!'
+      },
+      {
+        category: 'Domestic Flight (Central → North)',
+        title: 'Sun PhuQuoc Airways (Flight 934)',
+        date: 'Wed, Dec 23, 2026',
+        route: 'Da Nang DAD T1 (18:45) → Hanoi HAN T1 (20:05)',
+        refLabel: 'Booking Ref: 8I3U7X',
+        refValue: '8I3U7X',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Airport+Domestic+Terminal+1',
+        notes: 'E-Tickets: Jerome (809 2401201294), Sandra (809 2401201292), Katie (809 2401201293).'
+      },
+      {
+        category: 'Hanoi Stay — Part 1 (5 Nights, 5th Night Free!)',
+        title: 'Sheraton Hanoi Hotel (West Lake)',
+        date: 'Wed, Dec 23 – Mon, Dec 28, 2026',
+        route: 'K5 Nghi Tam, 11 Xuan Dieu Road, Tay Ho, Hanoi',
+        refLabel: 'Conf: 73088468',
+        refValue: '73088468',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sheraton+Hanoi+Hotel+K5+Nghi+Tam+Tay+Ho+Hanoi',
+        notes: 'Marriott Bonvoy Redemption (77,775 Pts total with Stay for 5, Pay for 4) • Platinum Elite Deluxe King • Stores heavy bags Dec 28–29.'
+      },
+      {
+        category: 'Ha Long Bay Luxury Cruise (1 Night)',
+        title: 'Calista Cruise - A Ha Long Bay Spectacle',
+        date: 'Mon, Dec 28 – Tue, Dec 29, 2026',
+        route: 'No. 37 Tuần Châu International Port, Ha Long Bay',
+        refLabel: 'Agoda ID: 2065203981',
+        refValue: '2065203981',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Tuan+Chau+International+Cruise+Port+Ha+Long+Bay',
+        notes: 'Host WhatsApp/Phone: +84 938 319 979 • Full board meals included • Message host 48 hrs ahead with passport photos & transfer pickup.'
+      },
+      {
+        category: 'Hanoi Stay — Part 2 & Return Flight',
+        title: 'Sheraton Hanoi (#73089686) + IndiGo 6E 1638',
+        date: 'Tue, Dec 29 – Wed, Dec 30, 2026',
+        route: 'HAN T2 (19:05) → Mumbai BOM T2 (23:05 Nonstop)',
+        refLabel: 'IndiGo PNR: YERR7Q',
+        refValue: 'YERR7Q',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Noi+Bai+International+Airport+Terminal+2+Hanoi',
+        notes: 'Sheraton Dec 29–30 Conf #73089686 (47,275 Pts) • IndiGo Flexi Plus Seats 11D, 11E, 11F • 30 kg checked bag each!'
+      }
+    ];
+
+    // ==========================================
+    // RENDER & UI FUNCTIONS
+    // ==========================================
+
+    function getResBadgeClasses(resType) {
+      if (resType === 'essential') {
+        return 'bg-rose-100 text-rose-900 border border-rose-200';
+      }
+      if (resType === 'rec') {
+        return 'bg-amber-100 text-amber-900 border border-amber-200';
+      }
+      return 'bg-emerald-100 text-emerald-900 border border-emerald-200';
+    }
+
+    function showToast(msg) {
+      var banner = document.getElementById('toast-banner');
+      var textEl = document.getElementById('toast-message');
+      if (!banner || !textEl) return;
+      textEl.textContent = msg;
+      banner.classList.remove('hidden');
+      setTimeout(function () {
+        banner.classList.add('hidden');
+      }, 2400);
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          showToast('Copied: ' + text);
+        }).catch(function () {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('Copied: ' + text);
+      } catch (e) {
+        showToast('Reference: ' + text);
+      }
+      document.body.removeChild(ta);
+    }
+
+    function switchMainView(viewName) {
+      appState.activeView = viewName;
+      var views = ['itinerary', 'christmas', 'dining', 'scams', 'tools', 'vault'];
+      for (var i = 0; i < views.length; i++) {
+        var v = views[i];
+        var sec = document.getElementById('view-' + v);
+        var btn = document.getElementById('nav-' + v);
+        if (sec) {
+          if (v === viewName) {
+            sec.classList.remove('hidden');
+          } else {
+            sec.classList.add('hidden');
+          }
+        }
+        if (btn) {
+          if (v === viewName) {
+            btn.className = 'nav-tab px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition bg-white text-slate-900 shadow-sm';
+          } else {
+            btn.className = 'nav-tab px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-300 hover:text-white hover:bg-slate-800/60';
+          }
+        }
+      }
+      // Show sticky mobile day bar only when on itinerary view
+      var mobileBar = document.getElementById('mobile-sticky-day-bar');
+      if (mobileBar) {
+        if (viewName === 'itinerary') {
+          mobileBar.classList.remove('hidden');
+        } else {
+          mobileBar.classList.add('hidden');
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function jumpToDayFromHub(dayNum) {
+      appState.regionFilter = 'all';
+      appState.displayMode = 'single';
+      appState.selectedDay = dayNum;
+      switchMainView('itinerary');
+      updateDisplayModeUI();
+      renderDayNav();
+      renderItineraryCards();
+    }
+
+    function setRegionFilter(reg) {
+      appState.regionFilter = reg;
+      var regs = ['all', 'hoian', 'hanoi', 'halong'];
+      for (var i = 0; i < regs.length; i++) {
+        var r = regs[i];
+        var btn = document.getElementById('reg-' + r);
+        if (btn) {
+          if (r === reg) {
+            btn.className = 'reg-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition';
+          } else {
+            btn.className = 'reg-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+          }
+        }
+      }
+      var filtered = getFilteredDays();
+      if (filtered.length > 0) {
+        var stillIn = false;
+        for (var j = 0; j < filtered.length; j++) {
+          if (filtered[j].day === appState.selectedDay) {
+            stillIn = true;
+            break;
+          }
+        }
+        if (!stillIn) {
+          appState.selectedDay = filtered[0].day;
+        }
+      }
+      renderDayNav();
+      renderItineraryCards();
+    }
+
+    function setDisplayMode(mode) {
+      appState.displayMode = mode;
+      updateDisplayModeUI();
+      renderDayNav();
+      renderItineraryCards();
+    }
+
+    function updateDisplayModeUI() {
+      var singleBtn = document.getElementById('mode-single-btn');
+      var allBtn = document.getElementById('mode-all-btn');
+      var sidebarBadge = document.getElementById('sidebar-mode-badge');
+      if (singleBtn && allBtn) {
+        if (appState.displayMode === 'single') {
+          singleBtn.className = 'px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-slate-900 shadow-sm transition';
+          allBtn.className = 'px-2.5 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition';
+        } else {
+          singleBtn.className = 'px-2.5 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition';
+          allBtn.className = 'px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-slate-900 shadow-sm transition';
+        }
+      }
+      if (sidebarBadge) {
+        sidebarBadge.textContent = appState.displayMode === 'single' ? 'Scroll All' : 'Single Focus';
+      }
+    }
+
+    function selectSingleDay(dayNum) {
+      appState.selectedDay = dayNum;
+      appState.displayMode = 'single';
+      updateDisplayModeUI();
+      renderDayNav();
+      renderItineraryCards();
+      // Scroll active mobile pill into center view smoothly
+      var activePill = document.getElementById('mob-day-pill-' + dayNum);
+      if (activePill && activePill.scrollIntoView) {
+        activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    function stepDay(delta) {
+      var next = appState.selectedDay + delta;
+      if (next < 1) next = 12;
+      if (next > 12) next = 1;
+      appState.regionFilter = 'all';
+      appState.selectedDay = next;
+      appState.displayMode = 'single';
+      updateDisplayModeUI();
+      setRegionFilter('all');
+      appState.selectedDay = next;
+      renderDayNav();
+      renderItineraryCards();
+      var activePill = document.getElementById('mob-day-pill-' + next);
+      if (activePill && activePill.scrollIntoView) {
+        activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    function setCardSectionFilter(sec) {
+      appState.sectionFilter = sec;
+      var secs = ['all', 'do', 'eat', 'hacks', 'scams'];
+      for (var i = 0; i < secs.length; i++) {
+        var s = secs[i];
+        var btn = document.getElementById('sec-' + s);
+        if (btn) {
+          if (s === sec) {
+            btn.className = 'sec-pill px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-600 text-white transition';
+          } else {
+            btn.className = 'sec-pill px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+          }
+        }
+      }
+      renderItineraryCards();
+    }
+
+    function handleItinerarySearch(val) {
+      appState.searchQuery = (val || '').trim().toLowerCase();
+      var clearBtn = document.getElementById('btn-clear-search');
+      if (clearBtn) {
+        if (appState.searchQuery.length > 0) {
+          clearBtn.classList.remove('hidden');
+          appState.displayMode = 'all';
+          updateDisplayModeUI();
+        } else {
+          clearBtn.classList.add('hidden');
+        }
+      }
+      renderDayNav();
+      renderItineraryCards();
+    }
+
+    function clearItinerarySearch() {
+      var input = document.getElementById('itinerary-search');
+      if (input) input.value = '';
+      appState.searchQuery = '';
+      var clearBtn = document.getElementById('btn-clear-search');
+      if (clearBtn) clearBtn.classList.add('hidden');
+      renderDayNav();
+      renderItineraryCards();
+    }
+
+    function getFilteredDays() {
+      return ITINERARY_DAYS.filter(function (d) {
+        if (appState.regionFilter !== 'all' && d.region !== appState.regionFilter) {
+          return false;
+        }
+        if (appState.searchQuery) {
+          var hay = (
+            d.title + ' ' +
+            d.date + ' ' +
+            d.hotel + ' ' +
+            JSON.stringify(d.activities) + ' ' +
+            JSON.stringify(d.dining) + ' ' +
+            JSON.stringify(d.hacks) + ' ' +
+            JSON.stringify(d.scams)
+          ).toLowerCase();
+          if (hay.indexOf(appState.searchQuery) === -1) return false;
+        }
+        return true;
+      });
+    }
+
+    function renderDayNav() {
+      var mobileStrip = document.getElementById('day-selector-strip');
+      var desktopRail = document.getElementById('desktop-day-rail');
+      var filtered = getFilteredDays();
+
+      var mobileHtml = '';
+      var railHtml = '';
+
+      for (var i = 0; i < filtered.length; i++) {
+        var d = filtered[i];
+        var isSel = (appState.displayMode === 'single' && appState.selectedDay === d.day);
+
+        var doneCount = 0;
+        for (var a = 0; a < d.activities.length; a++) {
+          if (appState.checkedItems[d.activities[a].id]) doneCount++;
+        }
+
+        // Sticky Mobile Header Pill
+        mobileHtml += '<button id="mob-day-pill-' + d.day + '" type="button" onclick="selectSingleDay(' + d.day + ')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold whitespace-nowrap transition border ' +
+          (isSel ? 'bg-amber-400 text-slate-950 border-amber-300 shadow-sm' : 'bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700') + '">' +
+          'D' + d.day + ' • ' + d.date.split(',')[1].trim() +
+          '</button>';
+
+        // Desktop Rail Item
+        var regDot = d.region === 'hoian' ? 'bg-amber-400' : (d.region === 'hanoi' ? 'bg-indigo-500' : 'bg-emerald-500');
+        railHtml += '<button type="button" onclick="selectSingleDay(' + d.day + ')" class="w-full text-left px-3.5 py-2.5 transition flex items-start justify-between gap-2 ' +
+          (isSel ? 'bg-indigo-50/90 border-l-4 border-indigo-600' : 'hover:bg-slate-50 border-l-4 border-transparent') + '">' +
+          '<div class="min-w-0">' +
+            '<div class="flex items-center gap-1.5">' +
+              '<span class="w-2 h-2 rounded-full ' + regDot + '"></span>' +
+              '<span class="text-xs font-extrabold ' + (isSel ? 'text-indigo-950' : 'text-slate-900') + '">Day ' + d.day + ' • ' + d.date + '</span>' +
+            '</div>' +
+            '<div class="text-xs font-medium ' + (isSel ? 'text-indigo-800' : 'text-slate-600') + ' truncate mt-0.5">' + d.shortTitle + '</div>' +
+          '</div>' +
+          '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold shrink-0 ' +
+            (doneCount === d.activities.length ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600') + '">' +
+            doneCount + '/' + d.activities.length +
+          '</span>' +
+        '</button>';
+      }
+
+      if (mobileStrip) mobileStrip.innerHTML = mobileHtml;
+      if (desktopRail) desktopRail.innerHTML = railHtml || '<div class="p-4 text-xs text-slate-500">No days match search.</div>';
+
+      var indicator = document.getElementById('stepper-day-indicator');
+      if (indicator) {
+        if (appState.displayMode === 'single') {
+          var currObj = ITINERARY_DAYS[appState.selectedDay - 1];
+          indicator.textContent = currObj ? ('Day ' + currObj.day + ' of 12 • ' + currObj.date) : 'Day ' + appState.selectedDay + ' of 12';
+        } else {
+          indicator.textContent = 'Showing ' + filtered.length + ' Days (Scroll Mode)';
+        }
+      }
+    }
+
+    function renderItineraryCards() {
+      var container = document.getElementById('itinerary-cards-container');
+      if (!container) return;
+
+      var filtered = getFilteredDays();
+      if (appState.displayMode === 'single' && !appState.searchQuery) {
+        filtered = filtered.filter(function (d) {
+          return d.day === appState.selectedDay;
+        });
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="bg-white rounded-2xl p-8 text-center border border-slate-200">' +
+          '<div class="text-base font-bold text-slate-800">No matching activities or days found</div>' +
+          '<p class="text-xs text-slate-500 mt-1">Try clearing your search box or switching the region filter back to "All 12 Days".</p>' +
+          '<button type="button" onclick="clearItinerarySearch(); setRegionFilter(\'all\');" class="mt-3 px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-semibold">Reset Filters</button>' +
+          '</div>';
+        return;
+      }
+
+      var html = '';
+      var sec = appState.sectionFilter;
+
+      for (var i = 0; i < filtered.length; i++) {
+        var d = filtered[i];
+        var badgeBg = d.region === 'hoian'
+          ? 'bg-amber-500/20 text-amber-200 border-amber-400/30'
+          : (d.region === 'hanoi' ? 'bg-indigo-500/20 text-indigo-200 border-indigo-400/30' : 'bg-emerald-500/20 text-emerald-200 border-emerald-400/30');
+
+        html += '<article class="bg-white rounded-2xl border border-slate-200 card-shadow overflow-hidden">';
+
+        // Card Header
+        html += '<div class="bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 text-white p-4 sm:p-5">' +
+          '<div class="flex flex-wrap items-center justify-between gap-2">' +
+            '<div class="flex flex-wrap items-center gap-2">' +
+              '<span class="px-2.5 py-0.5 rounded-lg text-xs font-extrabold bg-amber-400 text-slate-950">DAY ' + d.day + ' • ' + d.date.toUpperCase() + '</span>' +
+              '<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold border ' + badgeBg + '">' + d.regionLabel + '</span>' +
+              '<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">🚗 ' + d.driveBadge + '</span>' +
+            '</div>' +
+            '<span class="text-xs text-amber-300 font-medium">🌤️ ' + d.weatherTip + '</span>' +
+          '</div>' +
+          '<h2 class="text-base sm:text-xl font-extrabold mt-2 text-white">' + d.title + '</h2>' +
+          '<div class="flex flex-wrap items-center justify-between gap-2 mt-1.5 text-xs text-slate-300">' +
+            '<span>🏨 <strong>Overnight Base:</strong> ' + d.hotel + '</span>' +
+            (d.hotelMapUrl ? '<a href="' + d.hotelMapUrl + '" target="_blank" rel="noopener" class="px-2.5 py-0.5 rounded-md bg-white/10 hover:bg-white/20 text-amber-300 font-semibold transition">📍 Hotel on Google Maps ↗</a>' : '') +
+          '</div>' +
+        '</div>';
+
+        // Card Body
+        html += '<div class="p-4 sm:p-5 space-y-5">';
+
+        // 1. Schedule / Activities Section
+        if (sec === 'all' || sec === 'do') {
+          html += '<div>' +
+            '<h3 class="text-xs font-extrabold uppercase tracking-wider text-indigo-900 mb-2.5 flex items-center gap-1.5">' +
+              '<span>📍 Step-by-Step Schedule (With Maps, Tickets &amp; Reservation Rules)</span>' +
+            '</h3>' +
+            '<div class="space-y-3">';
+          for (var a = 0; a < d.activities.length; a++) {
+            var act = d.activities[a];
+            var isChecked = !!appState.checkedItems[act.id];
+            var resBadgeCls = getResBadgeClasses(act.resType);
+            html += '<div class="flex items-start gap-3 p-3.5 rounded-xl border transition ' +
+              (isChecked ? 'bg-emerald-50/50 border-emerald-200' : 'bg-slate-50/70 border-slate-200/90 hover:border-indigo-200') + '">' +
+              '<input type="checkbox" id="chk-' + act.id + '" ' + (isChecked ? 'checked' : '') + ' onchange="toggleChecklist(\'' + act.id + '\')" class="mt-1 w-4 h-4 accent-indigo-600 rounded cursor-pointer shrink-0" />' +
+              '<div class="flex-1 min-w-0">' +
+                '<div class="flex flex-wrap items-center gap-1.5">' +
+                  '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-indigo-100 text-indigo-900">' + act.time + '</span>' +
+                  (act.resBadge ? '<span class="px-2 py-0.5 rounded text-[11px] font-bold ' + resBadgeCls + '">' + act.resBadge + '</span>' : '') +
+                '</div>' +
+                '<label for="chk-' + act.id + '" class="block font-bold text-sm text-slate-900 mt-1.5 cursor-pointer ' + (isChecked ? 'line-through text-slate-400' : '') + '">' + act.title + '</label>' +
+                '<p class="text-xs text-slate-600 mt-0.5 leading-relaxed">' + act.detail + '</p>' +
+                '<div class="flex flex-wrap items-center gap-2 mt-2.5">' +
+                  (act.mapUrl ? '<a href="' + act.mapUrl + '" target="_blank" rel="noopener" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-semibold transition">📍 Google Maps ↗</a>' : '') +
+                  (act.ticketUrl ? '<a href="' + act.ticketUrl + '" target="_blank" rel="noopener" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-[11px] font-semibold transition">' + act.ticketLabel + '</a>' : '') +
+                '</div>' +
+              '</div>' +
+            '</div>';
+          }
+          html += '</div></div>';
+        }
+
+        // 2. Dining & Coffee Section
+        if (sec === 'all' || sec === 'eat') {
+          html += '<div>' +
+            '<h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-900 mb-2.5 flex items-center gap-1.5">' +
+              '<span>☕ Where to Eat &amp; Sip Today (With Maps &amp; Reservation Rules)</span>' +
+            '</h3>' +
+            '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">';
+          for (var m = 0; m < d.dining.length; m++) {
+            var meal = d.dining[m];
+            var mResCls = getResBadgeClasses(meal.resType);
+            html += '<div class="rounded-xl border border-amber-200/80 bg-amber-50/40 p-3.5 flex flex-col justify-between space-y-2">' +
+              '<div class="space-y-1">' +
+                '<div class="flex flex-wrap items-center justify-between gap-1.5">' +
+                  '<span class="text-[11px] font-bold uppercase tracking-wider text-amber-800">' + meal.meal + '</span>' +
+                  (meal.resBadge ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold ' + mResCls + '">' + meal.resBadge + '</span>' : '') +
+                '</div>' +
+                '<div class="font-bold text-sm text-slate-900">' + meal.spot + '</div>' +
+                '<p class="text-xs text-slate-600 leading-relaxed">' + meal.detail + '</p>' +
+              '</div>' +
+              '<div class="flex flex-wrap items-center gap-2 pt-1.5 border-t border-amber-200/50">' +
+                (meal.mapUrl ? '<a href="' + meal.mapUrl + '" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-semibold transition">📍 Google Maps ↗</a>' : '') +
+                '<a href="' + meal.link + '" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-semibold transition">' + (meal.linkLabel || 'Reserve / Menu ↗') + '</a>' +
+              '</div>' +
+            '</div>';
+          }
+          html += '</div></div>';
+        }
+
+        // 3. Travel Hacks & Pro Tips + 4. Scams & Watch-Outs
+        if (sec === 'all' || sec === 'hacks' || sec === 'scams') {
+          html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">';
+
+          if (sec === 'all' || sec === 'hacks') {
+            html += '<div class="rounded-xl border border-emerald-200 bg-emerald-50/50 p-3.5 space-y-2">' +
+              '<div class="text-xs font-extrabold uppercase tracking-wider text-emerald-950">💡 Local Travel Hacks &amp; Family Tips</div>' +
+              '<ul class="space-y-1.5 text-xs text-emerald-950/90 list-disc pl-4 leading-relaxed">';
+            for (var h = 0; h < d.hacks.length; h++) {
+              html += '<li>' + d.hacks[h] + '</li>';
+            }
+            html += '</ul></div>';
+          }
+
+          if (sec === 'all' || sec === 'scams') {
+            html += '<div class="rounded-xl border border-rose-200 bg-rose-50/50 p-3.5 space-y-2">' +
+              '<div class="text-xs font-extrabold uppercase tracking-wider text-rose-950">🛡️ Gotchas, Scams &amp; Things to Watch Out For</div>' +
+              '<ul class="space-y-1.5 text-xs text-rose-950/90 list-disc pl-4 leading-relaxed">';
+            for (var s = 0; s < d.scams.length; s++) {
+              html += '<li>' + d.scams[s] + '</li>';
+            }
+            html += '</ul></div>';
+          }
+
+          html += '</div>';
+        }
+
+        html += '</div></article>';
+      }
+
+      container.innerHTML = html;
+    }
+
+    function toggleChecklist(itemId) {
+      appState.checkedItems[itemId] = !appState.checkedItems[itemId];
+      saveState('vn2026_checked_v4', appState.checkedItems);
+      updateProgressHeader();
+      renderDayNav();
+      if (appState.activeView === 'itinerary') {
+        renderItineraryCards();
+      }
+    }
+
+    function updateProgressHeader() {
+      var total = 3;
+      var done = 0;
+      for (var t = 1; t <= 3; t++) {
+        var tid = 'tailor-step-' + t;
+        var el = document.getElementById(tid);
+        if (el) el.checked = !!appState.checkedItems[tid];
+        if (appState.checkedItems[tid]) done++;
+      }
+      for (var i = 0; i < ITINERARY_DAYS.length; i++) {
+        var acts = ITINERARY_DAYS[i].activities;
+        total += acts.length;
+        for (var j = 0; j < acts.length; j++) {
+          if (appState.checkedItems[acts[j].id]) done++;
+        }
+      }
+      var txt = document.getElementById('header-progress-text');
+      var bar = document.getElementById('header-progress-bar');
+      if (txt) txt.textContent = done + ' / ' + total;
+      if (bar) {
+        var pct = total > 0 ? Math.round((done / total) * 100) : 0;
+        bar.style.width = pct + '%';
+      }
+    }
+
+    function setDiningCity(city) {
+      appState.diningCity = city;
+      renderDiningGrid();
+    }
+
+    function setDiningTag(tag) {
+      appState.diningTag = tag;
+      renderDiningGrid();
+    }
+
+    function toggleDiningFavOnly() {
+      appState.diningFavOnly = !appState.diningFavOnly;
+      var btn = document.getElementById('btn-dining-favs');
+      if (btn) {
+        if (appState.diningFavOnly) {
+          btn.className = 'px-3 py-1.5 rounded-lg border border-amber-400 bg-amber-50 text-xs sm:text-sm font-bold text-amber-900 transition';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-lg border border-slate-300 text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-100 transition';
+        }
+      }
+      renderDiningGrid();
+    }
+
+    function toggleDiningFav(id) {
+      appState.favDining[id] = !appState.favDining[id];
+      saveState('vn2026_fav_dining_v4', appState.favDining);
+      renderDiningGrid();
+    }
+
+    function renderDiningGrid() {
+      var grid = document.getElementById('dining-grid');
+      var countEl = document.getElementById('fav-dining-count');
+      if (!grid) return;
+
+      var favTotal = 0;
+      for (var k in appState.favDining) {
+        if (appState.favDining[k]) favTotal++;
+      }
+      if (countEl) countEl.textContent = String(favTotal);
+
+      var filtered = DINING_SPOTS.filter(function (s) {
+        if (appState.diningCity !== 'all' && s.city !== appState.diningCity) return false;
+        if (appState.diningTag !== 'all' && s.tag !== appState.diningTag) return false;
+        if (appState.diningFavOnly && !appState.favDining[s.id]) return false;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="col-span-full bg-white rounded-2xl p-6 text-center border border-slate-200 text-xs text-slate-500">No dining spots match the current filter.</div>';
+        return;
+      }
+
+      var html = '';
+      for (var i = 0; i < filtered.length; i++) {
+        var spot = filtered[i];
+        var isFav = !!appState.favDining[spot.id];
+        var isUncleHuan = spot.id === 'din-1';
+        var resCls = getResBadgeClasses(spot.resType);
+        html += '<div class="bg-white rounded-2xl p-4 border ' + (isUncleHuan ? 'border-2 border-amber-400 ring-2 ring-amber-100' : 'border-slate-200') + ' card-shadow flex flex-col justify-between space-y-3">' +
+          '<div class="space-y-2">' +
+            '<div class="flex items-start justify-between gap-2">' +
+              '<div class="flex flex-wrap items-center gap-1.5">' +
+                '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-900 text-white">' + spot.city + '</span>' +
+                '<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-100 text-amber-900">' + spot.tag + '</span>' +
+              '</div>' +
+              '<button type="button" onclick="toggleDiningFav(\'' + spot.id + '\')" class="text-base leading-none ' + (isFav ? 'text-amber-500' : 'text-slate-300 hover:text-amber-400') + '" title="Save favorite">★</button>' +
+            '</div>' +
+            '<div>' +
+              '<span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold ' + resCls + '">' + spot.resBadge + '</span>' +
+            '</div>' +
+            '<h3 class="font-extrabold text-base text-slate-900">' + spot.name + '</h3>' +
+            '<div class="text-xs text-slate-500">📍 ' + spot.address + '</div>' +
+            '<div class="text-xs font-semibold text-emerald-700">💴 ' + spot.priceRange + '</div>' +
+            '<div class="text-xs text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100 space-y-1">' +
+              '<div><strong>🍽️ What to Order:</strong> ' + spot.whatToOrder + '</div>' +
+              '<div><strong>👧 For Katie:</strong> ' + spot.katiePick + '</div>' +
+            '</div>' +
+            '<p class="text-xs text-slate-600"><strong>💡 Booking &amp; Insider Tip:</strong> ' + spot.proTip + '</p>' +
+          '</div>' +
+          '<div class="pt-2.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-1.5">' +
+            '<div class="flex flex-wrap items-center gap-1.5">' +
+              '<a href="' + spot.mapUrl + '" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-semibold transition">📍 Google Maps ↗</a>' +
+              '<a href="' + spot.url + '" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-semibold transition">' + (spot.urlLabel || 'Reserve / Menu ↗') + '</a>' +
+            '</div>' +
+            '<button type="button" onclick="copyText(\'' + spot.name.replace(/'/g, "\\'") + ', ' + spot.address.replace(/'/g, "\\'") + '\')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold">📋 Copy</button>' +
+          '</div>' +
+        '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    function setScamFilter(reg) {
+      appState.scamRegion = reg;
+      var map = {
+        'all': 'scam-reg-all',
+        'Hoi An': 'scam-reg-hoian',
+        'Hanoi': 'scam-reg-hanoi',
+        'Ha Long Bay': 'scam-reg-halong',
+        'All Vietnam': 'scam-reg-general'
+      };
+      for (var k in map) {
+        var btn = document.getElementById(map[k]);
+        if (btn) {
+          if (k === reg) {
+            btn.className = 'scam-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition';
+          } else {
+            btn.className = 'scam-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+          }
+        }
+      }
+      renderScamsGrid();
+    }
+
+    function renderScamsGrid() {
+      var grid = document.getElementById('scams-grid');
+      if (!grid) return;
+      var filtered = SCAM_CARDS.filter(function (c) {
+        if (appState.scamRegion === 'all') return true;
+        return c.region === appState.scamRegion;
+      });
+      var html = '';
+      for (var i = 0; i < filtered.length; i++) {
+        var c = filtered[i];
+        var sevBadge = c.severity === 'High Priority'
+          ? 'bg-rose-100 text-rose-900'
+          : (c.severity === 'Medium Priority' ? 'bg-amber-100 text-amber-900' : 'bg-slate-100 text-slate-700');
+        html += '<div class="bg-white rounded-2xl p-4 border border-slate-200 card-shadow space-y-2">' +
+          '<div class="flex items-center justify-between gap-2">' +
+            '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-900 text-white">' + c.region + '</span>' +
+            '<span class="px-2 py-0.5 rounded text-[11px] font-bold ' + sevBadge + '">' + c.severity + '</span>' +
+          '</div>' +
+          '<h4 class="font-bold text-sm sm:text-base text-slate-900">' + c.title + '</h4>' +
+          '<p class="text-xs text-rose-950/90 bg-rose-50/70 p-2.5 rounded-xl border border-rose-100"><strong>⚠️ The Gotcha:</strong> ' + c.trap + '</p>' +
+          '<p class="text-xs text-emerald-950 bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100"><strong>✅ Smart Counter-Move:</strong> ' + c.fix + '</p>' +
+        '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    function renderSkipMatrix() {
+      var tbody = document.getElementById('skip-matrix-body');
+      if (!tbody) return;
+      var html = '';
+      for (var i = 0; i < SKIP_MATRIX.length; i++) {
+        var r = SKIP_MATRIX[i];
+        html += '<tr class="hover:bg-slate-50/80">' +
+          '<td class="py-3 px-3 font-bold text-slate-900">' + r.place + '</td>' +
+          '<td class="py-3 px-3 text-slate-600 whitespace-nowrap">' + r.drive + '</td>' +
+          '<td class="py-3 px-3"><span class="px-2 py-0.5 rounded-md text-xs font-bold ' + r.badgeClass + '">' + r.verdict + '</span></td>' +
+          '<td class="py-3 px-3 text-slate-600">' + r.reason + '</td>' +
+        '</tr>';
+      }
+      tbody.innerHTML = html;
+    }
+
+    function updateFromVnd(val) {
+      var num = parseFloat(val);
+      if (isNaN(num) || num < 0) num = 0;
+      appState.vndAmount = num;
+      renderCalculatorOutputs();
+    }
+
+    function updateExchangeRate(val) {
+      var rate = parseFloat(val);
+      if (isNaN(rate) || rate <= 0) rate = 300;
+      appState.vndPerInr = rate;
+      renderCalculatorOutputs();
+    }
+
+    function setVndPreset(amount) {
+      appState.vndAmount = amount;
+      var input = document.getElementById('vnd-amount-input');
+      if (input) input.value = String(amount);
+      renderCalculatorOutputs();
+    }
+
+    function renderCalculatorOutputs() {
+      var inrEl = document.getElementById('calc-inr-output');
+      var usdEl = document.getElementById('calc-usd-output');
+      var inr = Math.round(appState.vndAmount / appState.vndPerInr);
+      var usd = (appState.vndAmount / 25000).toFixed(2);
+      if (inrEl) inrEl.textContent = '₹' + inr.toLocaleString('en-IN');
+      if (usdEl) usdEl.textContent = '$' + usd;
+    }
+
+    function renderVaultCards() {
+      var grid = document.getElementById('vault-cards-grid');
+      if (!grid) return;
+      var html = '';
+      for (var i = 0; i < VAULT_BOOKINGS.length; i++) {
+        var b = VAULT_BOOKINGS[i];
+        html += '<div class="rounded-xl border border-slate-200 p-4 bg-slate-50/70 flex flex-col justify-between space-y-3">' +
+          '<div class="space-y-1.5">' +
+            '<div class="text-[11px] font-bold uppercase tracking-wider text-indigo-700">' + b.category + '</div>' +
+            '<div class="font-extrabold text-sm sm:text-base text-slate-900">' + b.title + '</div>' +
+            '<div class="text-xs font-semibold text-slate-700">📅 ' + b.date + '</div>' +
+            '<div class="text-xs text-slate-600">📍 ' + b.route + '</div>' +
+            '<p class="text-xs text-slate-500 pt-1">' + b.notes + '</p>' +
+          '</div>' +
+          '<div class="space-y-1.5">' +
+            (b.mapUrl ? '<a href="' + b.mapUrl + '" target="_blank" rel="noopener" class="w-full py-1.5 px-3 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-900 font-semibold text-xs flex items-center justify-center gap-1 transition">📍 Open Location in Google Maps ↗</a>' : '') +
+            '<button type="button" onclick="copyText(\'' + b.refValue + '\')" class="w-full py-2 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-amber-300 font-bold text-xs flex items-center justify-between transition">' +
+              '<span>' + b.refLabel + '</span>' +
+              '<span class="text-[11px] text-white font-normal">📋 Tap to Copy</span>' +
+            '</button>' +
+          '</div>' +
+        '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (appState.activeView !== 'itinerary') return;
+      var activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+      if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') return;
+      if (e.key === 'ArrowRight') {
+        stepDay(1);
+      } else if (e.key === 'ArrowLeft') {
+        stepDay(-1);
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', function () {
+      updateDisplayModeUI();
+      renderDayNav();
+      renderItineraryCards();
+      renderDiningGrid();
+      renderScamsGrid();
+      renderSkipMatrix();
+      renderCalculatorOutputs();
+      renderVaultCards();
+      updateProgressHeader();
+    });
+  </script>
+</body>
+</html>
